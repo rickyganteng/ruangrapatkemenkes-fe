@@ -1,5 +1,6 @@
 {
   "name": "kemenkes",
+  "homepage": "http://localhost:3000/bookingruangrapat",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

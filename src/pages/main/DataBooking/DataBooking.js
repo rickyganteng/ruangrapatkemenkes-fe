@@ -288,7 +288,7 @@ class Home extends Component {
       .then((res) => {
         this.deleteDataBook(laporan.id);
         setTimeout(() => {
-          this.props.history.push(`/databooking`);
+          this.props.history.push(`/bookingruangrapat/databooking`);
         }, 2000);
       })
       .catch((err) => {
@@ -460,7 +460,7 @@ class Home extends Component {
       .then((res) => {
         this.deleteDataBook(data.id);
         setTimeout(() => {
-          this.props.history.push(`/databooking`);
+          this.props.history.push(`/bookingruangrapat/databooking`);
         }, 10000);
       })
       .catch((err) => {

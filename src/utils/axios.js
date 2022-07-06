@@ -34,7 +34,7 @@ axiosApiIntances.interceptors.response.use(
     if (error.response.status === 403) {
       localStorage.clear();
       alert("Please log in with a verified account !");
-      window.location.href = "/login";
+      window.location.href = "/bookingruangrapat/login";
     }
     return Promise.reject(error);
   }

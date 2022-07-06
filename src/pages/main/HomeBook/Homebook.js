@@ -213,7 +213,7 @@ class Home extends Component {
       prevState.page !== this.state.page
     ) {
       this.props.history.push(
-        `/?search=${this.state.search}&sortby=${this.state.sortBy}&page=${this.state.page}`
+        `/bookingruangrapat?search=${this.state.search}&sortby=${this.state.sortBy}&page=${this.state.page}`
       );
     }
   }
@@ -461,7 +461,7 @@ class Home extends Component {
               });
               setTimeout(() => {
                 this.setState({ showModal: false });
-                this.props.history.push(`/`);
+                this.props.history.push(`/bookingruangrapat/`);
               }, 2000);
             })
             .catch((err) => {
@@ -521,7 +521,7 @@ class Home extends Component {
         });
         setTimeout(() => {
           this.setState({ showModal: false });
-          this.props.history.push(`/`);
+          this.props.history.push(`/bookingruangrapat/`);
         }, 2000);
       })
       .catch((err) => {
@@ -738,7 +738,7 @@ class Home extends Component {
             showModalEditFasilitas: false,
             showModalFasilitas: false
           });
-          this.props.history.push(`/`);
+          this.props.history.push(`/bookingruangrapat/`);
         }, 2000);
       })
       .catch((err) => {
@@ -1046,7 +1046,7 @@ class Home extends Component {
 
         this.deleteDataBook(ID);
         setTimeout(() => {
-          this.props.history.push(`/`);
+          this.props.history.push(`/bookingruangrapat/`);
         }, 2000);
       })
       .catch((err) => {

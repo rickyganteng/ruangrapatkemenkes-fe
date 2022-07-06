@@ -383,7 +383,7 @@ class Home extends Component {
 
 
   handleClearFilter = () => {
-    this.props.history.push(`/datafilterlaporan`);
+    this.props.history.push(`/bookingruangrapat/datafilterlaporan`);
     this.setState({
       result1: "",
       result2: "",
@@ -509,7 +509,11 @@ class Home extends Component {
     }
 
     const arraykosong = [];
+    for (let index = 0; index < laporantanggal.length; index++) {
+      const dataUnit = laporantanggal[index].booking_ruangan_unitkerja;
+      arraykosong.push(dataUnit);
 
+    }
 
     const arrayTuDirjen = [];
     const arrayTuSesDitJen = [];
@@ -659,6 +663,9 @@ class Home extends Component {
       }
     }
 
+    console.log(arraydirektorat);
+    console.log(arrayTuDirjen);
+    console.log(arraykosong);
     return (
       <>
 

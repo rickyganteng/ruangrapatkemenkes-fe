@@ -28,38 +28,38 @@ class App extends Component {
           <Router>
             <Switch>
               <Route
-                path="/datapeminjam"
+                path="/bookingruangrapat/datapeminjam"
                 exact
                 component={DataPeminjam}
 
               />
               <Route
-                path="/datalaporan"
+                path="/bookingruangrapat/datalaporan"
                 exact
                 component={DataLaporan}
 
               />
               <Route
-                path="/datalaporanuser"
+                path="/bookingruangrapat/datalaporanuser"
                 exact
                 component={DataLaporUser}
 
               />
               <Route
-                path="/datafilterlaporan"
+                path="/bookingruangrapat/datafilterlaporan"
                 exact
                 component={DataFilterLaporan}
 
               />
               <Route
-                path="/databooking"
+                path="/bookingruangrapat/databooking"
                 exact
                 component={DataBooking}
 
               />
               <PublicRoute
                 restricted={true}
-                path="/login"
+                path="/bookingruangrapat/login"
                 exact
                 component={Login}
               />
@@ -84,7 +84,7 @@ class App extends Component {
                 component={BasicRedux}
               />
               <Route
-                path="/"
+                path="/bookingruangrapat"
                 exact
                 component={HomeBook}
               />

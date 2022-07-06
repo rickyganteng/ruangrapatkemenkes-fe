@@ -61,12 +61,12 @@ class NavBar extends Component {
   };
 
   handleLogin = () => {
-    this.props.history.push("/login");
+    this.props.history.push("/bookingruangrapat/login");
   };
 
   handleLogout = () => {
     this.props.logout();
-    this.props.history.push("/login");
+    this.props.history.push("/bookingruangrapat/login");
   };
 
   render() {
@@ -92,7 +92,7 @@ class NavBar extends Component {
           >
             {isAdminPage ? (
               <Nav>
-                <Link className="ml-sm-5 mr-2" to="/">
+                <Link className="ml-sm-5 mr-2" to="/bookingruangrapat">
                   <span className={styles.link}>HOME</span>
                 </Link>
                 <Link className="ml-sm-5" to="/main/admin/dashboard">
@@ -107,35 +107,35 @@ class NavBar extends Component {
               </Nav>
             ) : (
               <Nav>
-                <Link className="ml-sm-5 mr-2" to="/">
+                <Link className="ml-sm-5 mr-2" to="/bookingruangrapat">
                   <span className={styles.link}>HOME</span>
                 </Link>
 
 
                 {data.user_role === "admin" ? (
-                  <Link className="ml-sm-5 mr-2" to="/datapeminjam">
+                  <Link className="ml-sm-5 mr-2" to="/bookingruangrapat/datapeminjam">
                     <span className={styles.link}>DATA PEMINJAM</span>
                   </Link>
                 ) : (
                   ""
                 )}
-                <Link className="ml-sm-5 mr-2" to="/databooking">
+                <Link className="ml-sm-5 mr-2" to="/bookingruangrapat/databooking">
                   <span className={styles.link}>DATA BOOKING</span>
                 </Link>
                 {data.user_role === "admin" ? (
 
-                  <Link className="ml-sm-5 mr-2" to="/datalaporan">
+                  <Link className="ml-sm-5 mr-2" to="/bookingruangrapat/datalaporan">
                     <span className={styles.link}>DATA LAPORAN</span>
                   </Link>
                 ) : (
-                  <Link className="ml-sm-5 mr-2" to="/datalaporanuser">
+                  <Link className="ml-sm-5 mr-2" to="/bookingruangrapat/datalaporanuser">
                     <span className={styles.link}>RIWAYAT BOOKING</span>
                   </Link>
                 )}
 
                 {data.user_role === "admin" ? (
 
-                  <Link className="ml-sm-5 mr-2" to="/datafilterlaporan">
+                  <Link className="ml-sm-5 mr-2" to="/bookingruangrapat/datafilterlaporan">
                     <span className={styles.link}>DATA FILTER LAPORAN</span>
                   </Link>
                 ) : (
