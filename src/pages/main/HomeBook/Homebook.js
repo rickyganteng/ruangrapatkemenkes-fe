@@ -24,8 +24,8 @@ import Text from "./Text"
 const inputOpenFileRef = React.createRef();
 class Home extends Component {
   constructor(props) {
-
     super(props);
+    console.log(this.props.auth.data.id);
 
     this.state = {
       idRuanganDelete: "",
@@ -203,6 +203,8 @@ class Home extends Component {
         this.getData2();
         this.getData3();
         this.getData4();
+        this.getData5();
+        this.getData6();
 
       });
     }
@@ -213,7 +215,7 @@ class Home extends Component {
       prevState.page !== this.state.page
     ) {
       this.props.history.push(
-        `/bookingruangrapat?search=${this.state.search}&sortby=${this.state.sortBy}&page=${this.state.page}`
+        `/?search=${this.state.search}&sortby=${this.state.sortBy}&page=${this.state.page}`
       );
     }
   }
@@ -232,13 +234,16 @@ class Home extends Component {
     this.props.getbookingRuanganAll(page2, limit2, sortBy2, search2);
   };
   getData3 = () => {
-    this.props.getBookingUser(this.state.form.idUserr);
+    const iduser = localStorage.getItem("user");
+    this.props.getBookingUser(iduser);
   };
   getData4 = () => {
     this.props.getwaitinglistAllTanpaFill();
   };
   getData5 = () => {
-    this.props.getWaitingListUser(this.state.form.idUserr);
+    console.log(localStorage.getItem("user"));
+    const iduser = localStorage.getItem("user");
+    this.props.getWaitingListUser(iduser);
   };
   getData6 = (params) => {
     if (params !== undefined) {
@@ -321,7 +326,7 @@ class Home extends Component {
   };
   postData = () => {
     const { form } = this.state;
-
+    console.log(form);
     delete form.ruangBuktiSuratDinas;
     const formData = new FormData();
     for (const key in form) {
@@ -343,6 +348,7 @@ class Home extends Component {
       form.ruangWaktuAkhir === "" &&
       form.ruangBuktiSuratDinas === null &&
       form.image === null &&
+      form.idUserr === null &&
       this.state.phoneNumberValid === "Invalid" &&
       this.state.NIPValid === "Invalid" &&
       this.state.EmailValid === "Invalid" &&
@@ -368,13 +374,14 @@ class Home extends Component {
       form.ruangWaktuAkhir !== "" &&
       form.ruangBuktiSuratDinas !== null &&
       form.image !== null &&
+      form.idUserr !== null &&
       this.state.phoneNumberValid === "valid" &&
       this.state.NIPValid === "valid" &&
       this.state.EmailValid === "valid" &&
       this.state.WaktuAkhirValid === "valid"
     ) {
       this.props
-        .postWaitingListLebihSatu(formData)
+        .postWaitingListLebihSatu(formData, this.state.form.idUserr)
         .then((res) => {
           this.setState(
             {
@@ -461,7 +468,7 @@ class Home extends Component {
               });
               setTimeout(() => {
                 this.setState({ showModal: false });
-                this.props.history.push(`/bookingruangrapat/`);
+                this.props.history.push(`/`);
               }, 2000);
             })
             .catch((err) => {
@@ -521,7 +528,7 @@ class Home extends Component {
         });
         setTimeout(() => {
           this.setState({ showModal: false });
-          this.props.history.push(`/bookingruangrapat/`);
+          this.props.history.push(`/`);
         }, 2000);
       })
       .catch((err) => {
@@ -590,7 +597,7 @@ class Home extends Component {
         ruangWaktuAkhir: "",
         ruangBuktiSuratDinas: null,
         image: null,
-        // idUserr: this.props.auth.data.id,
+        idUserr: this.props.auth.data.id,
 
         laporanruangNamaPeminjam: "",
         laporanruangNIP: "",
@@ -738,7 +745,7 @@ class Home extends Component {
             showModalEditFasilitas: false,
             showModalFasilitas: false
           });
-          this.props.history.push(`/bookingruangrapat/`);
+          this.props.history.push(`/`);
         }, 2000);
       })
       .catch((err) => {
@@ -779,7 +786,7 @@ class Home extends Component {
         LantaiRuang: data.ruangan_lantai,
         TempatRuang: data.alamat_gedung,
         JumlahKursi: data.jumlah_kursi,
-        ruangBuktiSuratDinas: `http://localhost:3001/backend1/api/${data.image_ruangan}`,
+        ruangBuktiSuratDinas: `http://192.168.50.23:3002/backend1/api/${data.image_ruangan}`,
         nomorPengelola: data.ruangan_nomor_pengelola,
         namaPengelola: data.ruangan_nama_pengelola,
       }
@@ -809,7 +816,7 @@ class Home extends Component {
         ruangWaktuMulai: data.row.booking_ruangan_waktu_penggunaan_awal,
         ruangWaktuAkhir: data.row.booking_ruangan_waktu_penggunaan_akhir,
         idUserr: data.row.id_peminjam,
-        ruangBuktiSuratDinas: `http://localhost:3001/backend1/api/${data.row.booking_ruangan_surat_dinas}`,
+        ruangBuktiSuratDinas: `http://192.168.50.23:3002/backend1/api/${data.row.booking_ruangan_surat_dinas}`,
         image: null,
 
       },
@@ -1046,7 +1053,7 @@ class Home extends Component {
 
         this.deleteDataBook(ID);
         setTimeout(() => {
-          this.props.history.push(`/bookingruangrapat/`);
+          this.props.history.push(`/`);
         }, 2000);
       })
       .catch((err) => {
@@ -1057,7 +1064,6 @@ class Home extends Component {
     this.setState({ [event.target.name]: "%" + event.target.value + "%" });
   };
   handleSelesai = (e) => {
-
     this.setState({
       actionPilihan: "Selesai",
     })
@@ -1200,7 +1206,6 @@ class Home extends Component {
     const { dataRuangan, paginationn, dataFasById, dataRuanganById } = this.props.ruangan;
     const { waitingtanpafill } = this.props.waitingList;
     const { data } = this.props.auth;
-    const { dataWaitingById } = this.props.idUser;
 
 
     const columns = [
@@ -1358,23 +1363,13 @@ class Home extends Component {
         <Container className="mt-5">
           <h3>Data Waiting List</h3>
           <div style={{ height: 400, width: '100%' }}>
-            {data.user_role === "admin" ? (
-              <DataGrid
-                rows={waitingtanpafill}
-                columns={columns}
-                pageSize={5}
-                rowsPerPageOptions={[5]}
-                getRowHeight={() => 100}
-              />
-            ) : (
-              <DataGrid
-                rows={dataWaitingById}
-                columns={columns}
-                pageSize={5}
-                rowsPerPageOptions={[5]}
-                getRowHeight={() => 100}
-              />
-            )}
+            <DataGrid
+              rows={waitingtanpafill}
+              columns={columns}
+              pageSize={5}
+              rowsPerPageOptions={[5]}
+              getRowHeight={() => 100}
+            />
           </div>
           <Modal
             size="xl"
@@ -1675,7 +1670,7 @@ class Home extends Component {
           >
             <Modal.Body>
               <Col>
-                <object width="100%" height="400" data={`http://localhost:3001/backend1/api/${photoSuratDinas}`} type="application/pdf"> </object>
+                <object width="100%" height="400" data={`http://192.168.50.23:3002/backend1/api/${photoSuratDinas}`} type="application/pdf"> </object>
               </Col>
             </Modal.Body>
           </Modal>
@@ -1697,7 +1692,7 @@ class Home extends Component {
               <Col>
                 <Image
                   className={`${styles.hero} p-4 mb-4 d-block mx-auto`}
-                  src={`http://localhost:3001/backend1/api/${photoSuratDinas}`}
+                  src={`http://192.168.50.23:3002/backend1/api/${photoSuratDinas}`}
                   fluid
                 />
               </Col>

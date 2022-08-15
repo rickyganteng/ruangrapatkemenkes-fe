@@ -185,7 +185,7 @@ class Home extends Component {
                       >
                         <img
                           className={styles.banner}
-                          src={`http://localhost:3001/backend1/api/${item.movie_image}`}
+                          src={`http://192.168.50.23:3002/backend1/api/${item.movie_image}`}
                           alt="..."
                         />
                       </div>

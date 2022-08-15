@@ -85,7 +85,7 @@ class Cards extends Component {
           <Card.Body>
             <div className="d-flex flex-row justify-content-center">
               <div className="mr-4 mt-2">
-                <Image src={`http://localhost:3001/backend1/api/${premiere_logo}`} fluid />
+                <Image src={`http://192.168.50.23:3002/backend1/api/${premiere_logo}`} fluid />
               </div>
               <div>
                 <p className={styles.title}>{premiere_name}</p>

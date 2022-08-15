@@ -90,7 +90,6 @@ class Home extends Component {
 
         NamaLengkapPeminjam: "",
         userName: "",
-        teamKerja: "",
         email: "",
         nohp: "",
         password: "",
@@ -172,7 +171,6 @@ class Home extends Component {
       form: {
         NamaLengkapPeminjam: data.row.user_name,
         userName: data.row.user_username,
-        teamKerja: data.row.user_team_kerja,
         email: data.row.user_email,
         nohp: data.row.user_phone_number,
         password: data.row.user_password,
@@ -204,7 +202,6 @@ class Home extends Component {
         ...this.state.form,
         NamaLengkapPeminjam: "",
         userName: "",
-        teamKerja: "",
         email: "",
         nohp: "",
         password: "",
@@ -248,7 +245,6 @@ class Home extends Component {
         ...this.state.form,
         NamaLengkapPeminjam: "",
         userName: "",
-        teamKerja: "",
         email: "",
         nohp: "",
         password: "",
@@ -267,7 +263,6 @@ class Home extends Component {
     if (
       form.NamaLengkapPeminjam === "" ||
       form.userName === "" ||
-      form.teamKerja === "" ||
       form.email === "" ||
       form.nohp === "" ||
       form.password === "" ||
@@ -398,7 +393,6 @@ class Home extends Component {
     const {
       NamaLengkapPeminjam,
       userName,
-      teamKerja,
       email,
       nohp,
       password,
@@ -411,7 +405,6 @@ class Home extends Component {
     const columns = [
       { field: 'user_name', headerName: 'Nama Lengkap', width: 300 },
       { field: 'user_username', headerName: 'User Nama', width: 300 },
-      { field: 'user_team_kerja', headerName: 'Team Kerja', width: 220 },
       { field: 'user_email', headerName: 'Email', width: 200 },
       { field: 'user_phone_number', headerName: 'No Hp', width: 150 },
       { field: 'user_unit_kerja', headerName: 'Unit Kerja', width: 300 },
@@ -496,19 +489,6 @@ class Home extends Component {
                 </Form.Group>
                 <Form.Group as={Row}>
                   <Col>
-
-                    <TextField
-                      required
-                      fullWidth
-                      id="outlined-password-input"
-                      label="Team Kerja"
-                      name="teamKerja"
-                      value={teamKerja}
-                      onChange={(event) => this.changeTextForm(event)}
-                    />
-                  </Col>
-                  <Col>
-
                     <TextField
                       required
                       fullWidth
@@ -520,10 +500,7 @@ class Home extends Component {
                       onChange={(event) => this.changeTextForm(event)}
                     />
                   </Col>
-                </Form.Group>
-                <Form.Group as={Row}>
                   <Col>
-
                     <TextField
                       required
                       fullWidth
@@ -534,8 +511,9 @@ class Home extends Component {
                       onChange={(event) => this.changeTextForm(event)}
                     />
                   </Col>
+                </Form.Group>
+                <Form.Group as={Row}>
                   <Col>
-
                     <TextField
                       required
                       fullWidth
@@ -561,8 +539,6 @@ class Home extends Component {
                       onChange={(event) => this.changeTextForm(event)}
                     />
                   </Col> */}
-                </Form.Group>
-                <Form.Group as={Row}>
                   <Col >
                     <DropdownButton
                       className={`${styles.dropDown}  text-left`}
@@ -594,6 +570,9 @@ class Home extends Component {
                       )}
                     </DropdownButton>
                   </Col>
+                </Form.Group>
+                <Form.Group as={Row}>
+
                   <Col >
                     <DropdownButton
                       className={`${styles.dropDown}  text-left`}

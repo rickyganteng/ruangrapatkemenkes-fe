@@ -33,9 +33,10 @@ class Login extends Component {
     this.props
       .login(this.state.form)
       .then((res) => {
+        console.log(this.props.auth);
         localStorage.setItem("token", this.props.auth.data.token);
-        localStorage.setItem("user", this.props.auth.data.user_id);
-        this.props.history.push("/bookingruangrapat");
+        localStorage.setItem("user", this.props.auth.data.id);
+        this.props.history.push("/");
       })
       .catch((err) => {
         this.setState({

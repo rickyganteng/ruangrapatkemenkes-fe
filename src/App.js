@@ -84,7 +84,7 @@ class App extends Component {
                 component={BasicRedux}
               />
               <Route
-                path="/bookingruangrapat"
+                path="/"
                 exact
                 component={HomeBook}
               />

@@ -10,7 +10,7 @@ const PublicRoute = ({ component: Component, restricted, ...rest }) => {
         // isAuth = user sudah login
         // restricted = jika sudah login tida bisa masuk halamn login lagi
         isAuthenticated && restricted ? (
-          <Redirect to="/bookingruangrapat/" />
+          <Redirect to="/" />
         ) : (
           <Component {...props} />
         )

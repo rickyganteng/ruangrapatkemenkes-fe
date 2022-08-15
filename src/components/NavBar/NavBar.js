@@ -92,7 +92,7 @@ class NavBar extends Component {
           >
             {isAdminPage ? (
               <Nav>
-                <Link className="ml-sm-5 mr-2" to="/bookingruangrapat">
+                <Link className="ml-sm-5 mr-2" to="/">
                   <span className={styles.link}>HOME</span>
                 </Link>
                 <Link className="ml-sm-5" to="/main/admin/dashboard">
@@ -107,7 +107,7 @@ class NavBar extends Component {
               </Nav>
             ) : (
               <Nav>
-                <Link className="ml-sm-5 mr-2" to="/bookingruangrapat">
+                <Link className="ml-sm-5 mr-2" to="/">
                   <span className={styles.link}>HOME</span>
                 </Link>
 
