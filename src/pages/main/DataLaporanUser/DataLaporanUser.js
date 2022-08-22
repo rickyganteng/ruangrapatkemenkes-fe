@@ -18,7 +18,7 @@ class Home extends Component {
     super(props);
     this.state = {
       dropDownVal: "Sort By",
-      sortBy: "id ASC",
+      sortBy: "id DESC",
       search: "%%",
       photoShow: false,
       modalTanggal: false,
@@ -343,7 +343,7 @@ class Home extends Component {
             <Modal.Body>
               <Image
                 className={`${styles.hero} p-4 mb-4 d-block mx-auto`}
-                src={`http://192.168.50.23:3002/backend1/api/${photoSuratDinas}`}
+                src={`http://localhost:3001/backend1/api/${photoSuratDinas}`}
                 fluid
               />
             </Modal.Body>

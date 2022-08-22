@@ -166,7 +166,17 @@ class NavBar extends Component {
                     LOGIN
                   </Button>
                 ) : (
-                  <div className="d-flex flex-md-row flex-column">
+                  < div className="flex-md-row ">
+
+                    {
+                      data.user_role === "admin" ? (
+                        ""
+                      ) : (
+                        <Link className="ml-sm-2 mr-5 mb-4" to="/bookingruangrapat/changeuser">
+                          <span className={styles.link}>CHANGE PASSWORD</span>
+                        </Link>
+                      )
+                    }
 
                     <Button
                       className={(styles.link, styles.btNav)}

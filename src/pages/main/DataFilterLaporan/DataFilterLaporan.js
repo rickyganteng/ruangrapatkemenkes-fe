@@ -26,7 +26,7 @@ class Home extends Component {
     this.state = {
       disableToDate: true,
       dropDownVal: "Sort By",
-      sortBy: "id ASC",
+      sortBy: "id DESC",
       search: "%%",
       resulttttt: "",
       resultttttToDate: "",
@@ -265,7 +265,7 @@ class Home extends Component {
       this.getDataMoviePlayNow(
         this.state.page,
         this.state.limit,
-        "movie_release_date ASC"
+        "movie_release_date DESC"
       );
     });
   };

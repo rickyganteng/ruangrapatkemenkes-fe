@@ -26,7 +26,7 @@ class Home extends Component {
     super(props);
     this.state = {
       dropDownVal: "Sort By",
-      sortBy: "id ASC",
+      sortBy: "id DESC",
       search: "%%",
       phoneNumberValid: "valid",
       NIPValid: "valid",
@@ -170,17 +170,17 @@ class Home extends Component {
     if (this.props.auth.data.user_role === "admin") {
       this.pushDataa = setInterval(
         () => this.pushData(),
-        60000
+        10000
       );
     } else {
       this.pushDataa = setInterval(
         () => this.pushDataBasic(),
-        60000
+        10000
       );
     }
     this.timerID = setInterval(
       () => this.tick(),
-      60000
+      10000
     );
   }
 

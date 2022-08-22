@@ -18,8 +18,9 @@ import HomeBook from "./pages/main/HomeBook/Homebook";
 import DataPeminjam from "./pages/main/DataPeminjam/DataPeminjam";
 import DataLaporan from "./pages/main/DataLaporan/DataLaporan";
 import DataBooking from "./pages/main/DataBooking/DataBooking";
-import DataLaporUser from "./pages/main/DataLaporanUser/DataLaporanUser"
-import DataFilterLaporan from "./pages/main/DataFilterLaporan/DataFilterLaporan"
+import DataLaporUser from "./pages/main/DataLaporanUser/DataLaporanUser";
+import DataFilterLaporan from "./pages/main/DataFilterLaporan/DataFilterLaporan";
+import UserChangePassword from "./pages/main/ChangePassword/ChangePassword";
 class App extends Component {
   render() {
     return (
@@ -55,6 +56,12 @@ class App extends Component {
                 path="/bookingruangrapat/databooking"
                 exact
                 component={DataBooking}
+
+              />
+              <Route
+                path="/bookingruangrapat/changeuser"
+                exact
+                component={UserChangePassword}
 
               />
               <PublicRoute
