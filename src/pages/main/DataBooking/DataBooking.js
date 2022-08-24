@@ -518,7 +518,7 @@ class Home extends Component {
         idUserr: data.row.id_peminjam,
         ruangWaktuMulai: data.row.booking_ruangan_waktu_penggunaan_awal,
         ruangWaktuAkhir: data.row.booking_ruangan_waktu_penggunaan_akhir,
-        ruangBuktiSuratDinas: `http://192.168.50.23:3002/backend1/api/${data.row.booking_ruangan_surat_dinas}`,
+        ruangBuktiSuratDinas: `http://103.74.143.139:3002/backend1/api/${data.row.booking_ruangan_surat_dinas}`,
         image: null,
 
       },
@@ -836,7 +836,7 @@ class Home extends Component {
             <Modal.Body>
               <Image
                 className={`${styles.hero} p-4 mb-4 d-block mx-auto`}
-                src={`http://192.168.50.23:3002/backend1/api/${photoSuratDinas}`}
+                src={`http://103.74.143.139:3002/backend1/api/${photoSuratDinas}`}
                 fluid
               />
             </Modal.Body>

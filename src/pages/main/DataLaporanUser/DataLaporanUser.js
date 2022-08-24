@@ -176,7 +176,7 @@ class Home extends Component {
         movieDirectedBy: data.movie_directed_by,
         movieCasts: data.movie_casts,
         movieSynopsis: data.movie_synopsis,
-        movieImage: `http://192.168.50.23:3002/backend1/api/${data.movie_image}`,
+        movieImage: `http://103.74.143.139:3002/backend1/api/${data.movie_image}`,
         image: null,
       },
     });

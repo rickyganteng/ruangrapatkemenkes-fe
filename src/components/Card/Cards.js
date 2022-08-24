@@ -20,7 +20,7 @@ class Cards extends Component {
         <Card style={{ width: "180px" }}>
           <Image
             variant="top"
-            src={`http://192.168.50.23:3002/backend1/api/${movie_image}`}
+            src={`http://103.74.143.139:3002/backend1/api/${movie_image}`}
             style={{ width: "100%", height: "244px" }}
           />
           <Card.Body className="text-center">

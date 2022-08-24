@@ -786,7 +786,7 @@ class Home extends Component {
         LantaiRuang: data.ruangan_lantai,
         TempatRuang: data.alamat_gedung,
         JumlahKursi: data.jumlah_kursi,
-        ruangBuktiSuratDinas: `http://192.168.50.23:3002/backend1/api/${data.image_ruangan}`,
+        ruangBuktiSuratDinas: `http://103.74.143.139:3002/backend1/api/${data.image_ruangan}`,
         nomorPengelola: data.ruangan_nomor_pengelola,
         namaPengelola: data.ruangan_nama_pengelola,
       }
@@ -816,7 +816,7 @@ class Home extends Component {
         ruangWaktuMulai: data.row.booking_ruangan_waktu_penggunaan_awal,
         ruangWaktuAkhir: data.row.booking_ruangan_waktu_penggunaan_akhir,
         idUserr: data.row.id_peminjam,
-        ruangBuktiSuratDinas: `http://192.168.50.23:3002/backend1/api/${data.row.booking_ruangan_surat_dinas}`,
+        ruangBuktiSuratDinas: `http://103.74.143.139:3002/backend1/api/${data.row.booking_ruangan_surat_dinas}`,
         image: null,
 
       },
@@ -1670,7 +1670,7 @@ class Home extends Component {
           >
             <Modal.Body>
               <Col>
-                <object width="100%" height="400" data={`http://192.168.50.23:3002/backend1/api/${photoSuratDinas}`} type="application/pdf"> </object>
+                <object width="100%" height="400" data={`http://103.74.143.139:3002/backend1/api/${photoSuratDinas}`} type="application/pdf"> </object>
               </Col>
             </Modal.Body>
           </Modal>
@@ -1692,7 +1692,7 @@ class Home extends Component {
               <Col>
                 <Image
                   className={`${styles.hero} p-4 mb-4 d-block mx-auto`}
-                  src={`http://192.168.50.23:3002/backend1/api/${photoSuratDinas}`}
+                  src={`http://103.74.143.139:3002/backend1/api/${photoSuratDinas}`}
                   fluid
                 />
               </Col>
