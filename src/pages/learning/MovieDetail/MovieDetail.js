@@ -48,7 +48,6 @@ class MovieDetail extends Component {
   };
 
   booking = () => {
-    console.log("BOOKING");
     const booking = JSON.stringify(this.state.selectedSeat);
     localStorage.setItem("bookingSeat", booking);
   };

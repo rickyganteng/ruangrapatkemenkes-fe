@@ -15,7 +15,14 @@ class Home extends Component {
     super(props);
     this.state = {
       form: {
-        passwordUser: "",
+        password: "",
+        NamaLengkapPeminjam: "",
+        userName: "",
+        email: "",
+        nohp: "",
+        userRole: "",
+        userUnitKerja: "",
+        userVerif: "",
         idUser: this.props.auth.data.id
       },
       showNotif: false,
@@ -23,9 +30,7 @@ class Home extends Component {
     };
   }
   updateData = (id) => {
-    console.log(id);
     const { form } = this.state;
-    console.log(form);
 
     delete form.movieImage;
     if (!form.image) {
@@ -50,7 +55,6 @@ class Home extends Component {
         // this.resetForm();
       })
       .catch((err) => {
-        console.log(err);
         this.setState({
           modalMsg: "Update Data Failed !",
           showNotif: true,
@@ -67,8 +71,6 @@ class Home extends Component {
   };
 
   changeTextForm = (event) => {
-    console.log(event.target.value);
-    console.log(event.target.name);
     this.setState({
       form: {
         ...this.state.form,
@@ -83,9 +85,8 @@ class Home extends Component {
   }
 
   render() {
-    const { passwordUser, idUser } = this.state.form
+    const { password, idUser } = this.state.form
     const { modalMsg, showNotif } = this.state
-    console.log(idUser);
     return (
       <>
 
@@ -104,8 +105,8 @@ class Home extends Component {
                   fullWidth
                   id="outlined-password-input"
                   label="Change Password"
-                  name="passwordUser"
-                  value={passwordUser}
+                  name="password"
+                  value={password}
                   onChange={(event) => this.changeTextForm(event)}
                 />
               </Col>

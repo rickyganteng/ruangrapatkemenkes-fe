@@ -25,7 +25,6 @@ const inputOpenFileRef = React.createRef();
 class Home extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.auth.data.id);
 
     this.state = {
       idRuanganDelete: "",
@@ -241,7 +240,6 @@ class Home extends Component {
     this.props.getwaitinglistAllTanpaFill();
   };
   getData5 = () => {
-    console.log(localStorage.getItem("user"));
     const iduser = localStorage.getItem("user");
     this.props.getWaitingListUser(iduser);
   };
@@ -326,7 +324,6 @@ class Home extends Component {
   };
   postData = () => {
     const { form } = this.state;
-    console.log(form);
     delete form.ruangBuktiSuratDinas;
     const formData = new FormData();
     for (const key in form) {

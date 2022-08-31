@@ -3,6 +3,7 @@ require("dotenv").config();
 
 const axiosApiIntances = axios.create({
   baseURL: "http://103.74.143.139:3002/backend1/api/v1/",
+  // baseURL: "http://localhost:3001/backend1/api/v1/",
 });
 
 // Add a request interceptor

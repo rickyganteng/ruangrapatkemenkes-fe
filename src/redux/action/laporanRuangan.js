@@ -32,6 +32,12 @@ export const postlaporanRuangan = (data) => {
     payload: axiosApiIntances.post("laporanruangan", data),
   };
 };
+export const deleteLaporanAktivitasAll = (id) => {
+  return {
+    type: "DELETE_LAPORANRUANGAN_ALL",
+    payload: axiosApiIntances.delete("laporanruangan"),
+  };
+};
 // export const getPremiereLocation = () => {
 //   return {
 //     type: "PREMIERE_LOC",

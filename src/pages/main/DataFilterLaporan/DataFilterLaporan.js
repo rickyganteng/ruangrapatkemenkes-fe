@@ -663,9 +663,7 @@ class Home extends Component {
       }
     }
 
-    console.log(arraydirektorat);
-    console.log(arrayTuDirjen);
-    console.log(arraykosong);
+
     return (
       <>
 

@@ -31,7 +31,6 @@ class Home extends Component {
   }
 
   getData = () => {
-    console.log("Get Data !");
     const { page, limit } = this.state;
     this.setState({ isLoading: true });
     axiosApiIntances
@@ -82,7 +81,6 @@ class Home extends Component {
 
   submitData = (event) => {
     event.preventDefault();
-    console.log("Save Data");
     // console.log(this.state.form); // digunakan untuk create data selain file
     const formData = new FormData(); // digunakan jika ingin upload file
     formData.append("movieName", this.state.form.movieName);
@@ -100,8 +98,6 @@ class Home extends Component {
   };
 
   setUpdate = (data) => {
-    console.log("Set Update !");
-    console.log(data);
     this.setState({
       isUpdate: true,
       id: data.movie_id,
@@ -115,9 +111,7 @@ class Home extends Component {
 
   updateData = (event) => {
     event.preventDefault();
-    console.log("Update data !");
-    console.log(this.state.id);
-    console.log(this.state.form);
+
     this.setState({ isUpdate: false });
     this.resetData(event);
   };

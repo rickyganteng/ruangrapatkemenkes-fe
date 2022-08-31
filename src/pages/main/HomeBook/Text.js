@@ -12,7 +12,6 @@ class Text extends Component {
 
   render() {
     const { value: user } = this.props;
-    console.log('qqqq', this.props);
     return (
       <>
         <Form.Group as={Row}>

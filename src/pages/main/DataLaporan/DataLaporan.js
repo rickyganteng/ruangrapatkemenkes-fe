@@ -7,7 +7,7 @@ import { Button, Image, Container, Row, Col, Form, Modal } from "react-bootstrap
 import styles from "./DataLaporan.module.css";
 import { connect } from "react-redux";
 import moment from "moment";
-import { getlaporanRuanganAll, getlaporanRuanganAllTanpaFill, getlaporanRuanganTanggal } from "../../../redux/action/laporanRuangan"
+import { getlaporanRuanganAll, getlaporanRuanganAllTanpaFill, getlaporanRuanganTanggal, deleteLaporanAktivitasAll } from "../../../redux/action/laporanRuangan"
 import { getLaporanUser } from "../../../redux/action/user"
 import { DataGrid } from '@mui/x-data-grid';
 import TextField from '@mui/material/TextField';
@@ -23,6 +23,7 @@ class Home extends Component {
       search: "%%",
       photoShow: false,
       modalTanggal: false,
+      showVerifDeleteAll: false,
       dataMovPlayNow: [],
       dataMovUpcoming: [],
       tmpDataMovUpcoming: [],
@@ -232,11 +233,58 @@ class Home extends Component {
       },
     });
   };
+
+  handleOpenVierifDeleteAll = () => {
+    this.setState({
+      showVerifDeleteAll: true,
+      // idDelete: id
+    })
+  };
+
+  handleCloseVierifDeleteAll = () => {
+    this.setState({
+      showVerifDeleteAll: false,
+      // idDelete: ""
+    })
+  };
+
+  deleteDataLaporanAktivitasAll = () => {
+    this.props
+      .deleteLaporanAktivitasAll()
+      .then((res) => {
+        this.setState(
+          {
+            modalMsg: "Data Laporan Ruangan Deleted !",
+            showNotif: true,
+          },
+          () => {
+            this.getData2();
+            this.getData3();
+            this.getData4();
+          }
+        );
+      })
+      .catch((err) => {
+        this.setState({
+          modalMsg: "Deleted Failed !",
+          show: true,
+        });
+      })
+      .finally(() => {
+        setTimeout(() => {
+          this.setState({
+            show: false,
+            showNotif: false,
+            showVerifDeleteAll: false
+          });
+        }, 1000);
+      });
+  };
   render() {
     const {
       FromDate, ToDate, searchtanggal
     } = this.state.form;
-    const { photoShow, modalTanggal, photoSuratDinas } = this.state;
+    const { photoShow, modalTanggal, photoSuratDinas, showVerifDeleteAll } = this.state;
     const { laporanruangann } = this.props.laporanruangan;
     const { data } = this.props.auth;
     const columns = [
@@ -424,6 +472,18 @@ class Home extends Component {
               </Col>
               {/* <Col xs={1}><Button onClick={() => this.handleTanggal()}><DateRangeIcon /></Button></Col> */}
             </Row>
+
+            {data.user_role === "admin" ?
+              <Row>
+                <Col sm={2}>
+                  <Button
+                    variant="danger"
+                    onClick={() => this.handleOpenVierifDeleteAll()}
+                  >
+                    Hapus All Data</Button>
+                </Col>
+              </Row>
+              : ""}
           </div>
           {/* <Button onClick={() => this.setSmShow()} className="me-2">Input Data Laporan</Button> */}
           <div style={{ height: 740, width: '100%' }}>
@@ -534,6 +594,29 @@ class Home extends Component {
               </Row>
             </Modal.Footer>
           </Modal >
+
+          {/* modal Verif delete all */}
+          <Modal size="sm" show={showVerifDeleteAll} onHide={this.handleCloseVierifDeleteAll} centered>
+            <Modal.Header closeButton>
+              <Modal.Title><h6>Apakah Anda yakin ingin menghapus semua data file ?</h6></Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Row>
+                <Col>
+                  <Button
+                    variant="danger"
+                    onClick={() => this.deleteDataLaporanAktivitasAll()}
+                  >Iya</Button>
+                </Col>
+                <Col>
+                  <Button
+                    onClick={() => this.handleCloseVierifDeleteAll()}
+                  >Tidak</Button>
+                </Col>
+              </Row>
+            </Modal.Body>
+          </Modal>
+          {/* akhir modal Verif delete all */}
           <Footer />
         </Container >
 
@@ -541,7 +624,7 @@ class Home extends Component {
     );
   }
 }
-const mapDispatchToProps = { getlaporanRuanganAll, getLaporanUser, getlaporanRuanganAllTanpaFill, getlaporanRuanganTanggal };
+const mapDispatchToProps = { getlaporanRuanganAll, getLaporanUser, getlaporanRuanganAllTanpaFill, getlaporanRuanganTanggal, deleteLaporanAktivitasAll };
 
 const mapStateToProps = (state) => ({
   movie: state.movie,

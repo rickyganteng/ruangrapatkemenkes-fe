@@ -117,7 +117,6 @@ class Home extends Component {
   };
 
   render() {
-    console.log("DataMovUpcoming", this.state.dataMovUpcoming);
     return (
       <>
         <NavBar isAdminPage={false} />
