@@ -20,6 +20,7 @@ import dummy from "../../../assets/img/no_image.jpg";
 import TextField from '@mui/material/TextField';
 import Footer from "../../../components/Footer/Footer";
 import Text from "./Text"
+import Tooltip from '@mui/material/Tooltip';
 
 const inputOpenFileRef = React.createRef();
 class Home extends Component {
@@ -1207,9 +1208,36 @@ class Home extends Component {
 
     const columns = [
 
-      { field: 'booking_ruangan_nama', headerName: 'Nama', width: 130 },
-      { field: 'booking_ruangan_nip', headerName: 'NIP', width: 130 },
-      { field: 'booking_ruangan_unitkerja', headerName: 'Unit Kerja', width: 130 },
+      {
+        field: 'booking_ruangan_nama', headerName: 'Nama', width: 130, renderCell: (params) => {
+          return (
+            // you will find row info in params
+            <Tooltip title={params.value}>
+              <div className={styles.wraptext}>{params.value}</div>
+            </Tooltip>
+          )
+        }
+      },
+      {
+        field: 'booking_ruangan_nip', headerName: 'NIP', width: 130, renderCell: (params) => {
+          return (
+            // you will find row info in params
+            <Tooltip title={params.value}>
+              <div className={styles.wraptext}>{params.value}</div>
+            </Tooltip>
+          )
+        }
+      },
+      {
+        field: 'booking_ruangan_unitkerja', headerName: 'Unit Kerja', width: 130, renderCell: (params) => {
+          return (
+            // you will find row info in params
+            <Tooltip title={params.value}>
+              <div className={styles.wraptext}>{params.value}</div>
+            </Tooltip>
+          )
+        }
+      },
       {
         field: 'booking_ruangan_tanggal', headerName: 'Tanggal Mulai', width: 130, renderCell: (params) => {
           var confdate = new Date(parseInt(params.row.booking_ruangan_tanggal)).toLocaleDateString("en-CA");
@@ -1221,12 +1249,66 @@ class Home extends Component {
           )
         }
       },
-      { field: 'booking_ruangan_nohp', headerName: 'No HP', width: 130 },
-      { field: 'booking_ruangan_direktorat', headerName: 'Direktorat', width: 130 },
-      { field: 'booking_ruangan_email', headerName: 'Email', width: 170 },
-      { field: 'booking_ruangan_penaggung_jawab', headerName: 'Penanggung Jawab', width: 130 },
-      { field: 'booking_ruangan_keterangan_kegiatan_acara', headerName: 'Keterangan Kegiatan Acara', width: 130 },
-      { field: 'booking_ruang_rapat_hadir_oleh', headerName: 'Rapat yang Hadir', width: 130 },
+      {
+        field: 'booking_ruangan_nohp', headerName: 'No HP', width: 130, renderCell: (params) => {
+          return (
+            // you will find row info in params
+            <Tooltip title={params.value}>
+              <div className={styles.wraptext}>{params.value}</div>
+            </Tooltip>
+          )
+        }
+      },
+      {
+        field: 'booking_ruangan_direktorat', headerName: 'Direktorat', width: 130, renderCell: (params) => {
+          return (
+            // you will find row info in params
+            <Tooltip title={params.value}>
+              <div className={styles.wraptext}>{params.value}</div>
+            </Tooltip>
+          )
+        }
+      },
+      {
+        field: 'booking_ruangan_email', headerName: 'Email', width: 170, renderCell: (params) => {
+          return (
+            // you will find row info in params
+            <Tooltip title={params.value}>
+              <div className={styles.wraptext}>{params.value}</div>
+            </Tooltip>
+          )
+        }
+      },
+      {
+        field: 'booking_ruangan_penaggung_jawab', headerName: 'Penanggung Jawab', width: 130, renderCell: (params) => {
+          return (
+            // you will find row info in params
+            <Tooltip title={params.value}>
+              <div className={styles.wraptext}>{params.value}</div>
+            </Tooltip>
+          )
+        }
+      },
+      {
+        field: 'booking_ruangan_keterangan_kegiatan_acara', headerName: 'Keterangan Kegiatan Acara', width: 130, renderCell: (params) => {
+          return (
+            // you will find row info in params
+            <Tooltip title={params.value}>
+              <div className={styles.wraptext}>{params.value}</div>
+            </Tooltip>
+          )
+        }
+      },
+      {
+        field: 'booking_ruang_rapat_hadir_oleh', headerName: 'Rapat yang Hadir', width: 130, renderCell: (params) => {
+          return (
+            // you will find row info in params
+            <Tooltip title={params.value}>
+              <div className={styles.wraptext}>{params.value}</div>
+            </Tooltip>
+          )
+        }
+      },
       { field: 'booking_ruangan_ruangan', headerName: 'Ruangan', width: 130 },
       { field: 'booking_ruangan_waktu_penggunaan_awal', headerName: 'Waktu Mulai', width: 130 },
       { field: 'booking_ruangan_waktu_penggunaan_akhir', headerName: 'Waktu Selesai', width: 130 },
