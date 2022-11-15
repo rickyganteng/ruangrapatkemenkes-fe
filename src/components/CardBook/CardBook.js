@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Button, Card, Image, Modal } from "react-bootstrap";
-import { withRouter } from "react-router-dom";
+import React, { Component } from 'react';
+import { Button, Card, Image, Modal } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
 // import dummy from "../../assets/img/logo_2.png";
-import styles from "./CardBook.module.css";
+import styles from './CardBook.module.css';
 
 class Cards extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class Cards extends Component {
       movieId: this.props.data[0],
       premiereId: this.props.data[1].premiere_id,
       showTimeId: false,
-      selectedClock: "",
+      selectedClock: '',
       show: false,
     };
   }
@@ -20,7 +20,7 @@ class Cards extends Component {
     const { selectedClock } = this.state;
     if (selectedClock === clock.show_time_clock) {
       this.setState({
-        selectedClock: "",
+        selectedClock: '',
         showTimeId: false,
       });
     } else {
@@ -47,7 +47,7 @@ class Cards extends Component {
         premiereId: premiereId,
         showTimeId: showTimeId,
       });
-      localStorage.setItem("bookingInfo", booking);
+      localStorage.setItem('bookingInfo', booking);
       this.props.history.push(`/main/order`);
     } else {
       this.setState({
@@ -76,13 +76,16 @@ class Cards extends Component {
           </Modal.Header>
         </Modal>
         <Card
-          className="mb-3 mr-2 ml-2"
-          style={{ width: "350px", height: "390px" }}
+          className='mb-3 mr-2 ml-2'
+          style={{ width: '350px', height: '390px' }}
         >
           <Card.Body>
-            <div className="d-flex flex-row justify-content-center">
-              <div className="mr-4 mt-2">
-                <Image src={`http://103.74.143.139:3002/backend1/api/${premiere_logo}`} fluid />
+            <div className='d-flex flex-row justify-content-center'>
+              <div className='mr-4 mt-2'>
+                <Image
+                  src={`https://devruangrapatp2p.kemkes.go.id/backend1/api/${premiere_logo}`}
+                  fluid
+                />
               </div>
               <div>
                 <p className={styles.title}>{premiere_name}</p>
@@ -92,7 +95,7 @@ class Cards extends Component {
               </div>
             </div>
             <hr />
-            <div className="d-flex flex-wrap">
+            <div className='d-flex flex-wrap'>
               {showTime.map((e, i) => {
                 return (
                   <div
@@ -112,7 +115,7 @@ class Cards extends Component {
               })}
             </div>
             <hr />
-            <div className="d-flex justify-content-between">
+            <div className='d-flex justify-content-between'>
               <p className={styles.price}>Price</p>
               <p className={styles.priceValue}>
                 <span>$</span>
@@ -120,10 +123,10 @@ class Cards extends Component {
                 <span>/seat</span>
               </p>
             </div>
-            <div className="pt-3">
+            <div className='pt-3'>
               <Button
                 className={styles.btBook}
-                variant="primary"
+                variant='primary'
                 onClick={() => {
                   this.handleBook();
                 }}

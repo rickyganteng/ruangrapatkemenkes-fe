@@ -1,19 +1,18 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router-dom";
-import { Nav, Navbar, Button, Image } from "react-bootstrap";
-import logo from "../../assets/img/logokemenkes.png";
-import styles from "./NavBar.module.css";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { Nav, Navbar, Button, Image, NavDropdown } from 'react-bootstrap';
+import logo from '../../assets/img/logokemenkes.png';
+import styles from './NavBar.module.css';
 // import ReactPaginate from "react-paginate";
-import { connect } from "react-redux";
-import { logout } from "../../redux/action/auth";
-
+import { connect } from 'react-redux';
+import { logout } from '../../redux/action/auth';
 
 class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: "",
+      search: '',
       page: 1,
       limit: 5,
       isShow: false,
@@ -28,7 +27,7 @@ class NavBar extends Component {
 
   getData = (search) => {
     const { page, limit } = this.state;
-    this.props.getAllMovie(page, limit, "movie_name ASC", "%" + search + "%");
+    this.props.getAllMovie(page, limit, 'movie_name ASC', '%' + search + '%');
   };
 
   changeText = (event) => {
@@ -61,12 +60,12 @@ class NavBar extends Component {
   };
 
   handleLogin = () => {
-    this.props.history.push("/bookingruangrapat/login");
+    this.props.history.push('/bookingruangrapat/login');
   };
 
   handleLogout = () => {
     this.props.logout();
-    this.props.history.push("/bookingruangrapat/login");
+    this.props.history.push('/bookingruangrapat/login');
   };
 
   render() {
@@ -77,69 +76,103 @@ class NavBar extends Component {
       <>
         <Navbar
           collapseOnSelect
-          expand="lg"
-          bg="light"
-          variant="light"
-          sticky="top"
+          expand='lg'
+          bg='light'
+          variant='light'
+          sticky='top'
         >
           <Navbar.Brand>
             <Image src={logo} fluid />
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Toggle aria-controls='responsive-navbar-nav' />
           <Navbar.Collapse
-            id="responsive-navbar-nav"
-            className="justify-content-between"
+            id='responsive-navbar-nav'
+            className='justify-content-between'
           >
             {isAdminPage ? (
               <Nav>
-                <Link className="ml-sm-5 mr-2" to="/">
+                <Link className='ml-sm-5 mr-2' to='/'>
                   <span className={styles.link}>HOME</span>
                 </Link>
-                <Link className="ml-sm-5" to="/main/admin/dashboard">
+                <Link className='ml-sm-5' to='/main/admin/dashboard'>
                   <span className={styles.link}>DASHBOARD</span>
                 </Link>
-                <Link className="ml-sm-5" to="/main/admin/manage-movie">
+                <Link className='ml-sm-5' to='/main/admin/manage-movie'>
                   <span className={styles.link}>MANAGE MOVIE</span>
                 </Link>
-                <Link className="ml-sm-5" to="/main/admin/manage-schedule">
+                <Link className='ml-sm-5' to='/main/admin/manage-schedule'>
                   <span className={styles.link}>Manage Schedule</span>
                 </Link>
               </Nav>
             ) : (
               <Nav>
-                <Link className="ml-sm-5 mr-2" to="/">
+                <Link className='ml-sm-5 mr-2' to='/'>
                   <span className={styles.link}>HOME</span>
                 </Link>
 
-
-                {data.user_role === "admin" ? (
-                  <Link className="ml-sm-5 mr-2" to="/bookingruangrapat/datapeminjam">
+                {data.user_role === 'admin' ? (
+                  <Link
+                    className='ml-sm-5 mr-2'
+                    to='/bookingruangrapat/datapeminjam'
+                  >
                     <span className={styles.link}>DATA PEMINJAM</span>
                   </Link>
                 ) : (
-                  ""
+                  ''
                 )}
-                <Link className="ml-sm-5 mr-2" to="/bookingruangrapat/databooking">
-                  <span className={styles.link}>DATA BOOKING</span>
-                </Link>
-                {data.user_role === "admin" ? (
-
-                  <Link className="ml-sm-5 mr-2" to="/bookingruangrapat/datalaporan">
+                {/* <Link
+                  className='ml-sm-5 mr-2'
+                  to='/bookingruangrapat/databooking'
+                >
+                  <span className={styles.link}>BOOKING</span>
+                </Link> */}
+                <NavDropdown
+                  title='BOOKING'
+                  className={`${styles.linkNavDropDown} ml-sm-5 mr-2`}
+                >
+                  <NavDropdown.Item>
+                    <Link to='/bookingruangrapat/databooking'>
+                      <span className={styles.link}>List All Booking</span>
+                    </Link>
+                  </NavDropdown.Item>
+                  {data.user_role === 'admin' ? (
+                    ''
+                  ) : (
+                    <>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item>
+                        <Link to='/bookingruangrapat/databookingbyid'>
+                          <span className={styles.link}>Your Booking</span>
+                        </Link>
+                      </NavDropdown.Item>
+                    </>
+                  )}
+                </NavDropdown>
+                {data.user_role === 'admin' ? (
+                  <Link
+                    className='ml-sm-5 mr-2'
+                    to='/bookingruangrapat/datalaporan'
+                  >
                     <span className={styles.link}>DATA LAPORAN</span>
                   </Link>
                 ) : (
-                  <Link className="ml-sm-5 mr-2" to="/bookingruangrapat/datalaporanuser">
+                  <Link
+                    className='ml-sm-5 mr-2'
+                    to='/bookingruangrapat/datalaporanuser'
+                  >
                     <span className={styles.link}>RIWAYAT BOOKING</span>
                   </Link>
                 )}
 
-                {data.user_role === "admin" ? (
-
-                  <Link className="ml-sm-5 mr-2" to="/bookingruangrapat/datafilterlaporan">
+                {data.user_role === 'admin' ? (
+                  <Link
+                    className='ml-sm-5 mr-2'
+                    to='/bookingruangrapat/datafilterlaporan'
+                  >
                     <span className={styles.link}>DATA FILTER LAPORAN</span>
                   </Link>
                 ) : (
-                  ""
+                  ''
                 )}
 
                 {/* {data.user_role === "admin" ? (
@@ -157,7 +190,7 @@ class NavBar extends Component {
                 <span className={styles.link}>Location</span>
               </p> */}
 
-              <div className="mr-sm-4 mt-2">
+              <div className='mr-sm-4 mt-2'>
                 {Object.keys(data).length === 0 ? (
                   <Button
                     className={(styles.link, styles.btNav)}
@@ -166,17 +199,17 @@ class NavBar extends Component {
                     LOGIN
                   </Button>
                 ) : (
-                  < div className="flex-md-row ">
-
-                    {
-                      data.user_role === "admin" ? (
-                        ""
-                      ) : (
-                        <Link className="ml-sm-2 mr-5 mb-4" to="/bookingruangrapat/changeuser">
-                          <span className={styles.link}>CHANGE PASSWORD</span>
-                        </Link>
-                      )
-                    }
+                  <div className='flex-md-row '>
+                    {data.user_role === 'admin' ? (
+                      ''
+                    ) : (
+                      <Link
+                        className='ml-sm-2 mr-5 mb-4'
+                        to='/bookingruangrapat/changeuser'
+                      >
+                        <span className={styles.link}>CHANGE PASSWORD</span>
+                      </Link>
+                    )}
 
                     <Button
                       className={(styles.link, styles.btNav)}
@@ -187,7 +220,6 @@ class NavBar extends Component {
                   </div>
                 )}
               </div>
-
             </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -203,7 +235,4 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = { logout };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(NavBar));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NavBar));

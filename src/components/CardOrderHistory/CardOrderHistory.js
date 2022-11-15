@@ -1,36 +1,34 @@
-import React, { Component } from "react";
-import moment from "moment";
-import { Button, Image } from "react-bootstrap";
-import styles from "./CardOrderHistory.module.css";
+import React, { Component } from 'react';
+import moment from 'moment';
+import { Button, Image } from 'react-bootstrap';
+import styles from './CardOrderHistory.module.css';
 
 class Cards extends Component {
   render() {
-    const {
-      movie_name,
-      premiere_logo,
-      show_time_date,
-      show_time_clock,
-    } = this.props.info;
+    const { movie_name, premiere_logo, show_time_date, show_time_clock } =
+      this.props.info;
 
     return (
       <>
-        <div className="mb-3 shadow p-4">
-          <div className="d-flex flex-sm-row flex-column justify-content-between">
+        <div className='mb-3 shadow p-4'>
+          <div className='d-flex flex-sm-row flex-column justify-content-between'>
             <div>
               <p className={styles.semi}>
-                {moment(show_time_date).format("dddd,LL")},{" "}
+                {moment(show_time_date).format('dddd,LL')},{' '}
                 <span>{show_time_clock}</span>
               </p>
               <p className={styles.name}>{movie_name}</p>
             </div>
             <div>
-              <Image src={`http://103.74.143.139:3002/backend1/api/${premiere_logo}`} />
+              <Image
+                src={`https://devruangrapatp2p.kemkes.go.id/backend1/api/${premiere_logo}`}
+              />
             </div>
           </div>
           <hr />
-          <div className="d-flex flex-row justify-content-between">
-            <Button variant="secondary">Ticket Used</Button>
-            <Button variant="outline-secondary">Show Details</Button>
+          <div className='d-flex flex-row justify-content-between'>
+            <Button variant='secondary'>Ticket Used</Button>
+            <Button variant='outline-secondary'>Show Details</Button>
           </div>
         </div>
       </>

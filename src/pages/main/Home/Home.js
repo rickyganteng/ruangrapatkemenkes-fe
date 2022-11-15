@@ -1,16 +1,16 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 // import { Link } from "react-router-dom";
-import NavBar from "../../../components/NavBar/NavBar";
-import Footer from "../../../components/Footer/Footer";
-import Cards from "../../../components/Card/Cards";
-import axiosApiIntances from "../../../utils/axios";
-import ReactPaginate from "react-paginate";
-import { Button, Image, Container, Row, Col, Form } from "react-bootstrap";
-import line from "../../../assets/img/line.png";
-import hero1 from "../../../assets/img/g1.png";
-import hero2 from "../../../assets/img/g2.png";
-import hero3 from "../../../assets/img/g3.png";
-import styles from "./Home.module.css";
+import NavBar from '../../../components/NavBar/NavBar';
+import Footer from '../../../components/Footer/Footer';
+import Cards from '../../../components/Card/Cards';
+import axiosApiIntances from '../../../utils/axios';
+import ReactPaginate from 'react-paginate';
+import { Button, Image, Container, Row, Col, Form } from 'react-bootstrap';
+import line from '../../../assets/img/line.png';
+import hero1 from '../../../assets/img/g1.png';
+import hero2 from '../../../assets/img/g2.png';
+import hero3 from '../../../assets/img/g3.png';
+import styles from './Home.module.css';
 
 class Home extends Component {
   constructor(props) {
@@ -20,18 +20,18 @@ class Home extends Component {
       dataMovUpcoming: [],
       tmpDataMovUpcoming: [],
       moon: [
-        "January 01",
-        "February 02",
-        "March 03",
-        "April 04",
-        "May 05",
-        "June 06",
-        "July 07",
-        "August 08",
-        "September 09",
-        "October 10",
-        "November 11",
-        "December 12",
+        'January 01',
+        'February 02',
+        'March 03',
+        'April 04',
+        'May 05',
+        'June 06',
+        'July 07',
+        'August 08',
+        'September 09',
+        'October 10',
+        'November 11',
+        'December 12',
       ],
       pagination: {},
       page: 1,
@@ -41,11 +41,11 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.getDataMovieUpcoming(1, 9, "movie_release_date DESC");
+    this.getDataMovieUpcoming(1, 9, 'movie_release_date DESC');
     this.getDataMoviePlayNow(
       this.state.page,
       this.state.limit,
-      "movie_release_date DESC"
+      'movie_release_date DESC'
     );
   }
 
@@ -80,7 +80,7 @@ class Home extends Component {
   handleMoon = (moon) => {
     const { dataMovUpcoming } = this.state;
     const filterTmp = dataMovUpcoming.filter(
-      (e) => e.movie_release_date.split("-")[1] === moon
+      (e) => e.movie_release_date.split('-')[1] === moon
     );
     this.setState({
       tmpDataMovUpcoming: filterTmp,
@@ -111,7 +111,7 @@ class Home extends Component {
       this.getDataMoviePlayNow(
         this.state.page,
         this.state.limit,
-        "movie_release_date DESC"
+        'movie_release_date DESC'
       );
     });
   };
@@ -121,8 +121,8 @@ class Home extends Component {
       <>
         <NavBar isAdminPage={false} />
         <Container fluid>
-          <Row className="mt-5">
-            <Col className="text-center" lg={6}>
+          <Row className='mt-5'>
+            <Col className='text-center' lg={6}>
               <div className={styles.centerContent}>
                 <p className={styles.semiTitle}>
                   Nearest Cinema, Newest Movie,
@@ -130,24 +130,24 @@ class Home extends Component {
                 <p className={styles.boldTitle}>Find out now!</p>
               </div>
             </Col>
-            <Col className="text-center" lg={6}>
-              <div className="p-2">
-                <Image className="mr-3 mt-5" src={hero1} />
-                <Image className="mr-3" src={hero2} />
-                <Image className="mb-5" src={hero3} />
+            <Col className='text-center' lg={6}>
+              <div className='p-2'>
+                <Image className='mr-3 mt-5' src={hero1} />
+                <Image className='mr-3' src={hero2} />
+                <Image className='mb-5' src={hero3} />
               </div>
             </Col>
           </Row>
         </Container>
-        <Container fluid className="pl-5">
-          <Row className="mt-5 ml-2 mr-2">
-            <Col className="text-sm-left text-center" sm={6}>
+        <Container fluid className='pl-5'>
+          <Row className='mt-5 ml-2 mr-2'>
+            <Col className='text-sm-left text-center' sm={6}>
               <div>
                 <p className={styles.rightBold}>Now Showing</p>
-                <img src={line} alt="..." />
+                <img src={line} alt='...' />
               </div>
             </Col>
-            <Col className="text-sm-right text-center" sm={6}>
+            <Col className='text-sm-right text-center' sm={6}>
               <p
                 className={styles.leftPurple}
                 onClick={() => this.handleView1()}
@@ -162,11 +162,11 @@ class Home extends Component {
           </Row>
 
           {this.state.isShowView1 ? (
-            <Row className="ml-2 mt-3">
+            <Row className='ml-2 mt-3'>
               {this.state.dataMovPlayNow.map((item, index) => {
                 return (
                   <Col sm={parseInt(12 / this.state.limit)} key={index}>
-                    <Cards className="mr-2" data={item} />
+                    <Cards className='mr-2' data={item} />
                   </Col>
                 );
               })}
@@ -174,18 +174,18 @@ class Home extends Component {
           ) : (
             <Row>
               <Col>
-                <div className="ml-2 overflow-auto d-flex flex-row">
+                <div className='ml-2 overflow-auto d-flex flex-row'>
                   {this.state.dataMovUpcoming.map((item, index) => {
                     return (
                       <div
-                        className="p-3 bd-highlight"
+                        className='p-3 bd-highlight'
                         key={index}
                         onClick={() => this.handleBanner(item.movie_id)}
                       >
                         <img
                           className={styles.banner}
-                          src={`http://103.74.143.139:3002/backend1/api/${item.movie_image}`}
-                          alt="..."
+                          src={`https://devruangrapatp2p.kemkes.go.id/backend1/api/${item.movie_image}`}
+                          alt='...'
                         />
                       </div>
                     );
@@ -195,12 +195,12 @@ class Home extends Component {
             </Row>
           )}
           {this.state.isShowView1 ? (
-            <Row className="mt-3">
+            <Row className='mt-3'>
               <ReactPaginate
-                previousLabel={"prev"}
-                nextLabel={"next"}
-                breakLabel={"..."}
-                breakClassName={"break-me"}
+                previousLabel={'prev'}
+                nextLabel={'next'}
+                breakLabel={'...'}
+                breakClassName={'break-me'}
                 pageCount={this.state.pagination.totalPage}
                 marginPagesDisplayed={5}
                 pageRangeDisplayed={5}
@@ -211,20 +211,20 @@ class Home extends Component {
               />
             </Row>
           ) : (
-            ""
+            ''
           )}
         </Container>
-        <Container fluid className="pl-5">
-          <Row className="mt-5 ml-2 mr-2">
-            <Col className="text-sm-left text-center" sm={6}>
+        <Container fluid className='pl-5'>
+          <Row className='mt-5 ml-2 mr-2'>
+            <Col className='text-sm-left text-center' sm={6}>
               <div>
                 <p className={styles.rightBold}>Upcoming Movies</p>
                 <br />
               </div>
             </Col>
-            <Col className="text-sm-right text-center" sm={6}>
+            <Col className='text-sm-right text-center' sm={6}>
               {this.state.tmpDataMovUpcoming.length !==
-                this.state.dataMovUpcoming.length ? (
+              this.state.dataMovUpcoming.length ? (
                 <p
                   className={styles.leftPurple}
                   onClick={() => this.handleView2()}
@@ -232,22 +232,22 @@ class Home extends Component {
                   View all
                 </p>
               ) : (
-                ""
+                ''
               )}
             </Col>
           </Row>
-          <Row className="mb-2">
+          <Row className='mb-2'>
             <Col>
-              <div className="ml-3 overflow-auto d-flex flex-row">
+              <div className='ml-3 overflow-auto d-flex flex-row'>
                 {this.state.moon.map((item, index) => {
                   return (
                     <Button
                       className={`${styles.btMoon} m-2`}
-                      variant="outline-primary"
+                      variant='outline-primary'
                       key={index}
-                      onClick={() => this.handleMoon(item.split(" ")[1])}
+                      onClick={() => this.handleMoon(item.split(' ')[1])}
                     >
-                      <div className={styles.butCnt}>{item.split(" ")[0]}</div>
+                      <div className={styles.butCnt}>{item.split(' ')[0]}</div>
                     </Button>
                   );
                 })}
@@ -256,11 +256,11 @@ class Home extends Component {
           </Row>
           <Row>
             <Col>
-              <div className="ml-3 overflow-auto d-flex flex-row">
+              <div className='ml-3 overflow-auto d-flex flex-row'>
                 {this.state.tmpDataMovUpcoming.length > 0 ? (
                   this.state.tmpDataMovUpcoming.map((item, index) => {
                     return (
-                      <div className="p-3 shadow" key={index}>
+                      <div className='p-3 shadow' key={index}>
                         <Cards data={item} />
                       </div>
                     );
@@ -272,7 +272,7 @@ class Home extends Component {
             </Col>
           </Row>
         </Container>
-        <Container fluid className="text-center pl-5 mt-5">
+        <Container fluid className='text-center pl-5 mt-5'>
           <div className={`${styles.beforeFoot} shadow`}>
             <div>
               <p className={styles.semiTitle}>Be the vanguard of the</p>
@@ -281,15 +281,15 @@ class Home extends Component {
             <div className={styles.form}>
               <Form>
                 <Form.Group>
-                  <div className="d-flex flex-sm-row flex-column align-items-center">
+                  <div className='d-flex flex-sm-row flex-column align-items-center'>
                     <Form.Control
-                      className="mb-2"
-                      type="email"
-                      placeholder="Type your Email"
+                      className='mb-2'
+                      type='email'
+                      placeholder='Type your Email'
                     />
                     <Button
                       className={`${styles.btJoin} mb-2`}
-                      variant="primary"
+                      variant='primary'
                     >
                       Join now
                     </Button>
@@ -307,7 +307,7 @@ class Home extends Component {
             </div>
           </div>
         </Container>
-        <Container className="pl-4">
+        <Container className='pl-4'>
           <Footer />
         </Container>
       </>

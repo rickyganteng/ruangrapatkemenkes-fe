@@ -1,4 +1,4 @@
-import axiosApiIntances from "../../utils/axios";
+import axiosApiIntances from '../../utils/axios';
 
 // export const getAllMovie = (page, limit, sortBy, search) => {
 //   return {
@@ -10,32 +10,44 @@ import axiosApiIntances from "../../utils/axios";
 // };
 export const getlaporanRuanganAll = (page, limit, sortBy, search) => {
   return {
-    type: "GET_LAPORANRUANGAN_ALL",
-    payload: axiosApiIntances.get(`laporanruangan?page=${page}&limit=${limit}&keywords=${search}&sort=${sortBy}`),
+    type: 'GET_LAPORANRUANGAN_ALL',
+    payload: axiosApiIntances.get(
+      `laporanruangan?page=${page}&limit=${limit}&keywords=${search}&sort=${sortBy}`
+    ),
   };
 };
 export const getlaporanRuanganAllTanpaFill = (search) => {
   return {
-    type: "GET_ALL_TANPAFILL",
-    payload: axiosApiIntances.get(`laporanruangan/tanpafill/q?keywords=${search}`),
+    type: 'GET_ALL_TANPAFILL',
+    payload: axiosApiIntances.get(
+      `laporanruangan/tanpafill/q?keywords=${search}`
+    ),
   };
 };
 export const getlaporanRuanganTanggal = (searchtanggal, fromdate, todate) => {
   return {
-    type: "GET_ALL_TANGAL",
-    payload: axiosApiIntances.get(`laporanruangan/bytanggal/tanggal/tanggal?searchtanggal=${searchtanggal}&fromdate=${fromdate}&todate=${todate}`),
+    type: 'GET_ALL_TANGAL',
+    payload: axiosApiIntances.get(
+      `laporanruangan/bytanggal/tanggal/tanggal?searchtanggal=${searchtanggal}&fromdate=${fromdate}&todate=${todate}`
+    ),
   };
 };
 export const postlaporanRuangan = (data) => {
   return {
-    type: "POST_LAPORANRUANGAN",
-    payload: axiosApiIntances.post("laporanruangan", data),
+    type: 'POST_LAPORANRUANGAN',
+    payload: axiosApiIntances.post('laporanruangan', data),
   };
 };
 export const deleteLaporanAktivitasAll = (id) => {
   return {
-    type: "DELETE_LAPORANRUANGAN_ALL",
-    payload: axiosApiIntances.delete("laporanruangan"),
+    type: 'DELETE_LAPORANRUANGAN_ALL',
+    payload: axiosApiIntances.delete('laporanruangan'),
+  };
+};
+export const deleteLaporanAktivitasById = (id) => {
+  return {
+    type: 'DELETE_LAPORANRUANGAN_BY_ID',
+    payload: axiosApiIntances.delete(`laporanruangan/${id}`),
   };
 };
 // export const getPremiereLocation = () => {

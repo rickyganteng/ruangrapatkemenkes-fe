@@ -1,43 +1,54 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 // import { Link } from "react-router-dom";
-import NavBar from "../../../components/NavBar/NavBar";
-import Footer from "../../../components/Footer/Footer";
-import axiosApiIntances from "../../../utils/axios";
-import { Button, Image, Container, Row, Col, Form, Modal } from "react-bootstrap";
-import styles from "./DataLaporanUser.module.css";
-import { connect } from "react-redux";
-import moment from "moment";
-import { getlaporanRuanganAll, getlaporanRuanganAllTanpaFill, getlaporanRuanganTanggal } from "../../../redux/action/laporanRuangan"
-import { getLaporanUser } from "../../../redux/action/user"
+import NavBar from '../../../components/NavBar/NavBar';
+import Footer from '../../../components/Footer/Footer';
+import axiosApiIntances from '../../../utils/axios';
+import {
+  Button,
+  Image,
+  Container,
+  Row,
+  Col,
+  Form,
+  Modal,
+} from 'react-bootstrap';
+import styles from './DataLaporanUser.module.css';
+import { connect } from 'react-redux';
+import moment from 'moment';
+import {
+  getlaporanRuanganAll,
+  getlaporanRuanganAllTanpaFill,
+  getlaporanRuanganTanggal,
+} from '../../../redux/action/laporanRuangan';
+import { getLaporanUser } from '../../../redux/action/user';
 import { DataGrid } from '@mui/x-data-grid';
 import TextField from '@mui/material/TextField';
-
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dropDownVal: "Sort By",
-      sortBy: "id DESC",
-      search: "%%",
+      dropDownVal: 'Sort By',
+      sortBy: 'id DESC',
+      search: '%%',
       photoShow: false,
       modalTanggal: false,
       dataMovPlayNow: [],
       dataMovUpcoming: [],
       tmpDataMovUpcoming: [],
       moon: [
-        "January 01",
-        "February 02",
-        "March 03",
-        "April 04",
-        "May 05",
-        "June 06",
-        "July 07",
-        "August 08",
-        "September 09",
-        "October 10",
-        "November 11",
-        "December 12",
+        'January 01',
+        'February 02',
+        'March 03',
+        'April 04',
+        'May 05',
+        'June 06',
+        'July 07',
+        'August 08',
+        'September 09',
+        'October 10',
+        'November 11',
+        'December 12',
       ],
       pagination: {},
       page: 4,
@@ -45,18 +56,18 @@ class Home extends Component {
       isShowView1: false,
       smShow: false,
       form: {
-        siswaNama: "",
-        siswaNISN: "",
-        siswaKelas: "",
-        siswaTempatLahir: "",
-        siswaTglLahir: "",
-        siswaNamaAyah: "",
-        siswaNamaIbu: "",
-        siswaAlamat: "",
-        searchtanggal: "",
-        FromDate: "",
-        ToDate: "",
-      }
+        siswaNama: '',
+        siswaNISN: '',
+        siswaKelas: '',
+        siswaTempatLahir: '',
+        siswaTglLahir: '',
+        siswaNamaAyah: '',
+        siswaNamaIbu: '',
+        siswaAlamat: '',
+        searchtanggal: '',
+        FromDate: '',
+        ToDate: '',
+      },
     };
   }
 
@@ -129,7 +140,7 @@ class Home extends Component {
   handleMoon = (moon) => {
     const { dataMovUpcoming } = this.state;
     const filterTmp = dataMovUpcoming.filter(
-      (e) => e.movie_release_date.split("-")[1] === moon
+      (e) => e.movie_release_date.split('-')[1] === moon
     );
     this.setState({
       tmpDataMovUpcoming: filterTmp,
@@ -160,7 +171,7 @@ class Home extends Component {
       this.getDataMoviePlayNow(
         this.state.page,
         this.state.limit,
-        "movie_release_date DESC"
+        'movie_release_date DESC'
       );
     });
   };
@@ -171,48 +182,48 @@ class Home extends Component {
       form: {
         movieName: data.movie_name,
         movieCategory: data.movie_category,
-        movieReleaseDate: moment(data.movie_release_date).format("YYYY-MM-DD"),
+        movieReleaseDate: moment(data.movie_release_date).format('YYYY-MM-DD'),
         movieDuration: data.movie_duration,
         movieDirectedBy: data.movie_directed_by,
         movieCasts: data.movie_casts,
         movieSynopsis: data.movie_synopsis,
-        movieImage: `http://103.74.143.139:3002/backend1/api/${data.movie_image}`,
+        movieImage: `https://devruangrapatp2p.kemkes.go.id/backend1/api/${data.movie_image}`,
         image: null,
       },
     });
   };
   handleSelect = (event) => {
     this.setState({
-      dropDownVal: event.split("-")[0],
-      sortBy: event.split("-")[1],
+      dropDownVal: event.split('-')[0],
+      sortBy: event.split('-')[1],
     });
   };
 
   setSmShow = (event) => {
     this.setState({
-      smShow: true
+      smShow: true,
     });
   };
   modalClose = (event) => {
     this.setState({
       smShow: false,
       photoShow: false,
-      modalTanggal: false
+      modalTanggal: false,
     });
   };
   changeText = (event) => {
-    this.setState({ [event.target.name]: "%" + event.target.value + "%" });
+    this.setState({ [event.target.name]: '%' + event.target.value + '%' });
   };
 
   handleImageTable = (moon) => {
     this.setState({
       photoSuratDinas: moon.row.booking_ruangan_surat_dinas,
-      photoShow: true
+      photoShow: true,
     });
   };
   handleTanggal = () => {
     this.setState({
-      modalTanggal: true
+      modalTanggal: true,
     });
   };
 
@@ -225,9 +236,7 @@ class Home extends Component {
     });
   };
   render() {
-    const {
-      FromDate, ToDate, searchtanggal
-    } = this.state.form;
+    const { FromDate, ToDate, searchtanggal } = this.state.form;
     const { photoShow, modalTanggal, photoSuratDinas } = this.state;
     const { laporanruangann } = this.props.laporanruangan;
     const { data } = this.props.auth;
@@ -235,71 +244,112 @@ class Home extends Component {
     const columns = [
       { field: 'booking_ruangan_nama', headerName: 'Nama', width: 130 },
       { field: 'booking_ruangan_nip', headerName: 'NIP', width: 130 },
-      { field: 'booking_ruangan_unitkerja', headerName: 'Unit Kerja', width: 130 },
       {
-        field: 'booking_ruangan_tanggal', headerName: 'Tanggal Mulai', width: 130, renderCell: (params) => {
-          var confdate = new Date(parseInt(params.row.booking_ruangan_tanggal)).toLocaleDateString("en-CA");
-          return (
-            <div
-              className={` mt-0  mx-auto`}
-
-            >{confdate}</div>
-          )
-        }
+        field: 'booking_ruangan_unitkerja',
+        headerName: 'Unit Kerja',
+        width: 130,
+      },
+      {
+        field: 'booking_ruangan_tanggal',
+        headerName: 'Tanggal Mulai',
+        width: 130,
+        renderCell: (params) => {
+          var confdate = new Date(
+            parseInt(params.row.booking_ruangan_tanggal)
+          ).toLocaleDateString('en-CA');
+          return <div className={` mt-0  mx-auto`}>{confdate}</div>;
+        },
       },
       { field: 'booking_ruangan_nohp', headerName: 'No HP', width: 130 },
-      { field: 'booking_ruangan_direktorat', headerName: 'Direktorat', width: 130 },
-      { field: 'booking_ruangan_email', headerName: 'Email', width: 170 },
-      { field: 'booking_ruangan_penaggung_jawab', headerName: 'Penanggung Jawab', width: 130 },
-      { field: 'booking_ruangan_keterangan_kegiatan_acara', headerName: 'Keterangan Kegiatan Acara', width: 130 },
-      { field: 'booking_ruang_rapat_hadir_oleh', headerName: 'Rapat yang Hadir', width: 130 },
-      { field: 'booking_ruangan_ruangan', headerName: 'Ruangan', width: 130 },
-      { field: 'booking_ruangan_waktu_penggunaan_awal', headerName: 'Waktu Mulai', width: 130 },
-      { field: 'booking_ruangan_waktu_penggunaan_akhir', headerName: 'Waktu Selesai', width: 130 },
       {
-        field: 'suratdinasbooking_ruangan_surat_dinas', headerName: 'Surat Dinas', width: 130, renderCell: (params) => {
+        field: 'booking_ruangan_direktorat',
+        headerName: 'Direktorat',
+        width: 130,
+      },
+      { field: 'booking_ruangan_email', headerName: 'Email', width: 170 },
+      {
+        field: 'booking_ruangan_penaggung_jawab',
+        headerName: 'Penanggung Jawab',
+        width: 130,
+      },
+      {
+        field: 'booking_ruangan_keterangan_kegiatan_acara',
+        headerName: 'Keterangan Kegiatan Acara',
+        width: 130,
+      },
+      {
+        field: 'booking_ruang_rapat_hadir_oleh',
+        headerName: 'Rapat yang Hadir',
+        width: 130,
+      },
+      { field: 'booking_ruangan_ruangan', headerName: 'Ruangan', width: 130 },
+      {
+        field: 'booking_ruangan_waktu_penggunaan_awal',
+        headerName: 'Waktu Mulai',
+        width: 130,
+      },
+      {
+        field: 'booking_ruangan_waktu_penggunaan_akhir',
+        headerName: 'Waktu Selesai',
+        width: 130,
+      },
+      {
+        field: 'suratdinasbooking_ruangan_surat_dinas',
+        headerName: 'Surat Dinas',
+        width: 130,
+        renderCell: (params) => {
+          console.log('params', params);
           return (
             // you will find row info in params
-            <Button onClick={() => this.handleImageTable(params)} variant="outline-primary">View Photo</Button>
-
-          )
-        }
+            // <Button
+            //   onClick={() => this.handleImageTable(params)}
+            //   variant='outline-primary'
+            // >
+            //   View Photo
+            // </Button>
+            // <Button>
+            <a
+              target='_blank'
+              href={`https://devruangrapatp2p.kemkes.go.id/backend1/api/${params.row.booking_ruangan_surat_dinas}`}
+              // href={`http://localhost:3001/backend1/api/${params.row.booking_ruangan_surat_dinas}`}
+            >
+              <Button variant='outline-primary'>View</Button>
+            </a>
+            // </Button>
+          );
+        },
       },
       { field: 'status_booking_ruangan', headerName: 'Status', width: 130 },
-
     ];
     return (
       <>
-
         <NavBar isAdminPage={false} />
-
 
         <Container>
           <Row>
-            {data.user_role === "admin" ? (
+            {data.user_role === 'admin' ? (
               <Col>
-                <h2 className="mt-5 mb-3">DATA LAPORAN</h2>
+                <h2 className='mt-5 mb-3'>DATA LAPORAN</h2>
               </Col>
             ) : (
               <Col>
-                <h2 className="mt-5 mb-3">Riwayat Booking</h2>
+                <h2 className='mt-5 mb-3'>Riwayat Booking</h2>
               </Col>
             )}
 
-            <Col lg={3} className="mt-5 mb-3">
+            <Col lg={3} className='mt-5 mb-3'>
               <Form className={styles.searchInput}>
                 <Form.Group>
-                  {data.user_role === "admin" ? (
+                  {data.user_role === 'admin' ? (
                     <Form.Control
-                      type="text"
-                      placeholder="Cari Nama Unit Kerja..."
-                      name="search"
+                      type='text'
+                      placeholder='Cari Nama Unit Kerja...'
+                      name='search'
                       onChange={(event) => this.changeText(event)}
                     />
                   ) : (
-                    ""
+                    ''
                   )}
-
                 </Form.Group>
               </Form>
             </Col>
@@ -309,7 +359,7 @@ class Home extends Component {
           <div style={{ height: 740, width: '100%' }}>
             {/* {this.state.form.FromDate === "" ? (<p>heheheh</p>) : (<p>huhuhuh</p>)} */}
 
-            {data.user_role === "admin" ? (
+            {data.user_role === 'admin' ? (
               <DataGrid
                 rows={laporanruangann}
                 columns={columns}
@@ -329,65 +379,62 @@ class Home extends Component {
           </div>
 
           <Modal
-            size="xl"
+            size='xl'
             centered
             show={photoShow}
             onHide={() => this.modalClose()}
-            aria-labelledby="example-modal-sizes-title-sm"
+            aria-labelledby='example-modal-sizes-title-sm'
           >
             <Modal.Header closeButton>
-              <Modal.Title id="example-modal-sizes-title-sm">
+              <Modal.Title id='example-modal-sizes-title-sm'>
                 Photo Surat Dinas
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Image
                 className={`${styles.hero} p-4 mb-4 d-block mx-auto`}
-                src={`http://localhost:3001/backend1/api/${photoSuratDinas}`}
+                src={`https://devruangrapatp2p.kemkes.go.id/backend1/api/${photoSuratDinas}`}
+                // src={`http://localhost:3001/backend1/api/${photoSuratDinas}`}
                 fluid
               />
             </Modal.Body>
-          </Modal >
+          </Modal>
           <Modal
-            size="xl"
+            size='xl'
             centered
             show={modalTanggal}
             onHide={() => this.modalClose()}
-            aria-labelledby="example-modal-sizes-title-sm"
+            aria-labelledby='example-modal-sizes-title-sm'
           >
             <Modal.Header closeButton>
-              <Modal.Title id="example-modal-sizes-title-sm">
+              <Modal.Title id='example-modal-sizes-title-sm'>
                 Filter Date
               </Modal.Title>
-
             </Modal.Header>
             <Modal.Body>
-
               <Row>
                 <Col>
-
                   <TextField
                     required
                     fullWidth
-                    id="outlined-password-input"
-                    label="From Date"
-                    type="date"
+                    id='outlined-password-input'
+                    label='From Date'
+                    type='date'
                     // defaultValue="05/04/2022"
-                    name="FromDate"
+                    name='FromDate'
                     value={FromDate}
                     onChange={(event) => this.changeTextForm(event)}
                   />
                 </Col>
                 <Col>
-
                   <TextField
                     required
                     fullWidth
-                    id="outlined-password-input"
-                    label="To Date"
-                    type="date"
-                    defaultValue="05/04/2022"
-                    name="ToDate"
+                    id='outlined-password-input'
+                    label='To Date'
+                    type='date'
+                    defaultValue='05/04/2022'
+                    name='ToDate'
                     value={ToDate}
                     onChange={(event) => this.changeTextForm(event)}
                   />
@@ -395,10 +442,10 @@ class Home extends Component {
                 <Col lg={3}>
                   <TextField
                     fullWidth
-                    id="outlined-password-input"
-                    label="Search Unit Kerja"
-                    type="text"
-                    name="searchtanggal"
+                    id='outlined-password-input'
+                    label='Search Unit Kerja'
+                    type='text'
+                    name='searchtanggal'
                     value={searchtanggal}
                     onChange={(event) => this.changeTextForm(event)}
                   />
@@ -411,13 +458,15 @@ class Home extends Component {
                   <Button
                     className={`${styles.btReset} mb-2`}
                     onClick={() => this.modalClose()}
-
-                    variant="outline-primary">Cancel</Button>
+                    variant='outline-primary'
+                  >
+                    Cancel
+                  </Button>
                 </Col>
                 <Col>
                   <Button
                     className={styles.btSubmit}
-                    variant="primary"
+                    variant='primary'
                     onClick={() => this.sendData()}
                   >
                     {/* {isUpdate ? "Update" : "Submit"} */}
@@ -426,15 +475,19 @@ class Home extends Component {
                 </Col>
               </Row>
             </Modal.Footer>
-          </Modal >
+          </Modal>
           <Footer />
-        </Container >
-
+        </Container>
       </>
     );
   }
 }
-const mapDispatchToProps = { getlaporanRuanganAll, getLaporanUser, getlaporanRuanganAllTanpaFill, getlaporanRuanganTanggal };
+const mapDispatchToProps = {
+  getlaporanRuanganAll,
+  getLaporanUser,
+  getlaporanRuanganAllTanpaFill,
+  getlaporanRuanganTanggal,
+};
 
 const mapStateToProps = (state) => ({
   movie: state.movie,
@@ -444,7 +497,7 @@ const mapStateToProps = (state) => ({
   laporanUser: state,
   auth: state.auth,
   coba: state,
-  user: state.user
+  user: state.user,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

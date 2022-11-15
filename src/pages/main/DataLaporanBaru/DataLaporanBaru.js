@@ -11,8 +11,9 @@ import {
   Col,
   Form,
   Modal,
+  Table,
 } from 'react-bootstrap';
-import styles from './DataLaporan.module.css';
+import styles from './DataLaporanBaru.module.css';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import {
@@ -20,6 +21,7 @@ import {
   getlaporanRuanganAllTanpaFill,
   getlaporanRuanganTanggal,
   deleteLaporanAktivitasAll,
+  deleteLaporanAktivitasById,
 } from '../../../redux/action/laporanRuangan';
 import { getLaporanUser } from '../../../redux/action/user';
 import { DataGrid } from '@mui/x-data-grid';
@@ -36,6 +38,10 @@ class Home extends Component {
       photoShow: false,
       modalTanggal: false,
       showVerifDeleteAll: false,
+      showwHandleDelete: false,
+      showModalSucces: false,
+      idDelete: '',
+      modalMsg: '',
       dataMovPlayNow: [],
       dataMovUpcoming: [],
       tmpDataMovUpcoming: [],
@@ -191,6 +197,7 @@ class Home extends Component {
         movieCasts: data.movie_casts,
         movieSynopsis: data.movie_synopsis,
         movieImage: `https://devruangrapatp2p.kemkes.go.id/backend1/api/${data.movie_image}`,
+        // movieImage: `http://localhost:3001/backend1/api/${data.movie_image}`,
         image: null,
       },
     });
@@ -219,8 +226,9 @@ class Home extends Component {
   };
 
   handleImageTable = (moon) => {
+    console.log('moon', moon);
     this.setState({
-      photoSuratDinas: moon.row.booking_ruangan_surat_dinas,
+      photoSuratDinas: moon,
       photoShow: true,
     });
   };
@@ -249,7 +257,15 @@ class Home extends Component {
   handleCloseVierifDeleteAll = () => {
     this.setState({
       showVerifDeleteAll: false,
+      showwHandleDelete: false,
       // idDelete: ""
+    });
+  };
+  handleShowConfirmDelete = (data) => {
+    console.log('aaa', data.id);
+    this.setState({
+      showwHandleDelete: true,
+      idDelete: data.id,
     });
   };
 
@@ -285,12 +301,66 @@ class Home extends Component {
         }, 1000);
       });
   };
+  deleteData = (id) => {
+    this.props
+      .deleteLaporanAktivitasById(id)
+      .then((res) => {
+        this.setState(
+          {
+            modalMsg: 'Data Laporan Deleted !',
+            show: true,
+            showwHandleDelete: false,
+            showModalSucces: true,
+          },
+          () => {
+            this.getData2();
+            this.getData3();
+            this.getData4();
+          }
+        );
+      })
+      .catch((err) => {
+        this.setState({
+          modalMsg: 'Deleted Failed !',
+          show: true,
+        });
+      })
+      .finally(() => {
+        setTimeout(() => {
+          this.setState({ show: false, showModalSucces: false });
+        }, 1000);
+      });
+  };
   render() {
     const { FromDate, ToDate, searchtanggal } = this.state.form;
-    const { photoShow, modalTanggal, photoSuratDinas, showVerifDeleteAll } =
-      this.state;
+    const {
+      photoShow,
+      modalTanggal,
+      photoSuratDinas,
+      showVerifDeleteAll,
+      showwHandleDelete,
+      idDelete,
+      showModalSucces,
+      modalMsg,
+    } = this.state;
     const { laporanruangann } = this.props.laporanruangan;
     const { data } = this.props.auth;
+    const IconDelete = (
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        width='16'
+        height='16'
+        fill='currentColor'
+        class='bi bi-trash'
+        viewBox='0 0 16 16'
+      >
+        <path d='M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z' />
+        <path
+          fill-rule='evenodd'
+          d='M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z'
+        />
+      </svg>
+    );
     const columns = [
       {
         field: 'booking_ruangan_nama',
@@ -534,7 +604,7 @@ class Home extends Component {
             )}
           </div>
           {/* <Button onClick={() => this.setSmShow()} className="me-2">Input Data Laporan</Button> */}
-          <div style={{ height: 740, width: '100%' }}>
+          {/* <div style={{ height: 740, width: '100%' }}>
             <DataGrid
               rows={laporanruangann}
               columns={columns}
@@ -542,7 +612,80 @@ class Home extends Component {
               rowsPerPageOptions={[10, 15, 25]}
               getRowHeight={() => 100}
             />
+          </div> */}
+          <div className='mt-5'>
+            <Table striped bordered hover responsive>
+              <thead className='text-center'>
+                <tr className={styles.witdthKolom}>
+                  <th>No</th>
+                  <th>Nama tol</th>
+                  <th>NIP</th>
+                  <th>Unit Kerja</th>
+                  <th>Tanggal Mulai</th>
+                  <th>No HP</th>
+                  <th>Direktorat</th>
+                  <th>Email</th>
+                  <th>Penanggung Jawab</th>
+                  <th>
+                    <div style={{ 'padding-left': 150, 'padding-right': 150 }}>
+                      Keterangan Kegiatan Acara
+                    </div>
+                  </th>
+                  <th>Rapat yang Hadir</th>
+                  <th>Ruang Rapat</th>
+                  <th>Waktu Mulai</th>
+                  <th>Waktu Selesai</th>
+                  <th>Surat Dinas</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              {laporanruangann.map((item, index) => {
+                console.log('Data laporanruangann', laporanruangann);
+                return (
+                  <tbody>
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{item.booking_ruangan_nama}</td>
+                      <td>{item.booking_ruangan_nip}</td>
+                      <td>{item.booking_ruangan_unitkerja}</td>
+                      <td>{item.booking_ruangan_tanggal}</td>
+                      <td>{item.booking_ruangan_nohp}</td>
+                      <td>{item.booking_ruangan_direktorat}</td>
+                      <td>{item.booking_ruangan_email}</td>
+                      <td>{item.booking_ruangan_penaggung_jawab}</td>
+                      <td>{item.booking_ruangan_keterangan_kegiatan_acara}</td>
+                      <td>{item.booking_ruang_rapat_hadir_oleh}</td>
+                      <td>{item.booking_ruangan_ruangan}</td>
+                      <td>{item.booking_ruangan_waktu_penggunaan_awal} WIB</td>
+                      <td>{item.booking_ruangan_waktu_penggunaan_akhir} WIB</td>
+                      <td>
+                        <a
+                          target='_blank'
+                          href={`https://devruangrapatp2p.kemkes.go.id/backend1/api/${item.booking_ruangan_surat_dinas}`}
+                          // href={`http://localhost:3001/backend1/api/${item.booking_ruangan_surat_dinas}`}
+                        >
+                          <Button variant='outline-primary'>View</Button>
+                        </a>
+                      </td>
+                      <td>{item.status_booking_ruangan}</td>
+                      <td>
+                        {' '}
+                        <Button
+                          onClick={() => this.handleShowConfirmDelete(item)}
+                          variant='warning'
+                        >
+                          {IconDelete}
+                          {/* <EditIcon /> */}
+                        </Button>
+                      </td>
+                    </tr>
+                  </tbody>
+                );
+              })}
+            </Table>
           </div>
+
           <Modal
             size='xl'
             centered
@@ -559,6 +702,7 @@ class Home extends Component {
               <Image
                 className={`${styles.hero} p-4 mb-4 d-block mx-auto`}
                 src={`https://devruangrapatp2p.kemkes.go.id/backend1/api/${photoSuratDinas}`}
+                // src={`http://localhost:3001/backend1/api/${photoSuratDinas}`}
                 fluid
               />
             </Modal.Body>
@@ -672,6 +816,40 @@ class Home extends Component {
             </Modal.Body>
           </Modal>
           {/* akhir modal Verif delete all */}
+
+          <Modal
+            // size="xl"
+            centered
+            show={showwHandleDelete}
+            onHide={() => this.handleCloseVierifDeleteAll()}
+            aria-labelledby='example-modal-sizes-title-sm'
+          >
+            <Modal.Header closeButton>Apakah Anda Yakin Dihapus ?</Modal.Header>
+            <Modal.Body>
+              <Button
+                variant='primary'
+                onClick={() => this.deleteData(idDelete)}
+              >
+                Iya
+              </Button>{' '}
+              <Button
+                variant='danger'
+                onClick={() => this.handleCloseVierifDeleteAll()}
+              >
+                Tidak
+              </Button>
+            </Modal.Body>
+          </Modal>
+
+          <Modal
+            centered
+            show={showModalSucces}
+            onHide={() => this.modalPhotoClose()}
+            aria-labelledby='example-modal-sizes-title-sm'
+          >
+            <Modal.Header closeButton></Modal.Header>
+            <Modal.Body>{modalMsg}</Modal.Body>
+          </Modal>
           <Footer />
         </Container>
       </>
@@ -684,6 +862,7 @@ const mapDispatchToProps = {
   getlaporanRuanganAllTanpaFill,
   getlaporanRuanganTanggal,
   deleteLaporanAktivitasAll,
+  deleteLaporanAktivitasById,
 };
 
 const mapStateToProps = (state) => ({

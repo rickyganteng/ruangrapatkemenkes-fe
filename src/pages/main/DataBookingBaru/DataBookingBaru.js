@@ -9,12 +9,15 @@ import {
   Row,
   Col,
   Form,
+  Dropdown,
+  DropdownButton,
   Modal,
+  Table,
 } from 'react-bootstrap';
 import CheckIcon from '@mui/icons-material/Check';
 import EditIcon from '@mui/icons-material/Edit';
 import CancelIcon from '@mui/icons-material/Cancel';
-import styles from './DataBooking.module.css';
+import styles from './DataBookingBaru.module.css';
 import { connect } from 'react-redux';
 import {
   deleteBookingRuangan,
@@ -41,6 +44,8 @@ class Home extends Component {
     super(props);
     this.state = {
       dropDownVal: 'Sort By',
+      dropDownValDirektorat: 'Select Direktorat',
+      dropDownValUnitKerja: 'Select Unit Kerja',
       sortBy: 'id DESC',
       search: '%%',
       phoneNumberValid: 'valid',
@@ -71,71 +76,122 @@ class Home extends Component {
       direktorat: [
         {
           namaDirektorat: 'Sekertariat P2P',
-          namaUnitKerja: [
-            'Tu. Dirjen',
-            'Tu.sesditjen',
-            'Subag Adum Sekertariat P2P',
-            'Program dan Informasi',
-            'Hukum, Organisasi dan Hubungan Masyarakat',
-            'Keuangan dan BMN',
-            'Kepegawaian dan Umum',
-          ],
+          // namaUnitKerja: [
+          //   'Tu. Dirjen',
+          //   'Tu.sesditjen',
+          //   'Subag Adum Sekertariat P2P',
+          //   'Program dan Informasi',
+          //   'Hukum, Organisasi dan Hubungan Masyarakat',
+          //   'Keuangan dan BMN',
+          //   'Kepegawaian dan Umum',
+          // ],
         },
         {
           namaDirektorat: 'P2PM',
-          namaUnitKerja: [
-            'Subag Adum P2PM',
-            'Turbeckulosis dan infeksisaluran pernapasan akut (ISPA)',
-            'HIV, Penyakit Infeksi Menular Seksual (PIMS), Hepatitis dan Penyakit saluran Infeksi Pernapasa (PISP)',
-            'Neglected Disease (Penyakit Tropis Terabaikan)',
-            'Zoonosis dan Penyakit Akibat Gigitan Hewan Berbisa dan Tanaman Beracun',
-            'Penyakit Tular Vektor',
-          ],
+          // namaUnitKerja: [
+          //   'Subag Adum P2PM',
+          //   'Turbeckulosis dan infeksisaluran pernapasan akut (ISPA)',
+          //   'HIV, Penyakit Infeksi Menular Seksual (PIMS), Hepatitis dan Penyakit saluran Infeksi Pernapasa (PISP)',
+          //   'Neglected Disease (Penyakit Tropis Terabaikan)',
+          //   'Zoonosis dan Penyakit Akibat Gigitan Hewan Berbisa dan Tanaman Beracun',
+          //   'Penyakit Tular Vektor',
+          // ],
         },
         {
           namaDirektorat: 'Pengelolaan  Imunisasi',
-          namaUnitKerja: [
-            'Subag Adum Pengelolaan Imunisasi',
-            'Imunisasi Dasar dan Anak Usia di bawah dua tahun (Baduta)',
-            'Imunisasi Tambahan Dan Khusus',
-            'Imunisasi Wanita Usia Subur (WUS) dan Surveilan Penyakit yang Dapat Dicegah Dengan Imunisasi (PD31),(KIPI)',
-            'Imunisasi Usia Sekolah dan Sumber Daya Imunisasi',
-          ],
+          // namaUnitKerja: [
+          //   'Subag Adum Pengelolaan Imunisasi',
+          //   'Imunisasi Dasar dan Anak Usia di bawah dua tahun (Baduta)',
+          //   'Imunisasi Tambahan Dan Khusus',
+          //   'Imunisasi Wanita Usia Subur (WUS) dan Surveilan Penyakit yang Dapat Dicegah Dengan Imunisasi (PD31),(KIPI)',
+          //   'Imunisasi Usia Sekolah dan Sumber Daya Imunisasi',
+          // ],
         },
         {
           namaDirektorat: 'P2PTM',
-          namaUnitKerja: [
-            'Subag Adum P2PTM',
-            'Gangguan Indra Dan Funsional',
-            'Diabetes Melitus dan Gangguan Metabolik',
-            'Jantung Dan Pembulu Darah',
-            'Kangker dan Kelainan Darah',
-            'Paru Kronik dan Gangguan Imunologi',
-          ],
+          // namaUnitKerja: [
+          //   'Subag Adum P2PTM',
+          //   'Gangguan Indra Dan Funsional',
+          //   'Diabetes Melitus dan Gangguan Metabolik',
+          //   'Jantung Dan Pembulu Darah',
+          //   'Kangker dan Kelainan Darah',
+          //   'Paru Kronik dan Gangguan Imunologi',
+          // ],
         },
         {
           namaDirektorat: 'Penyehatan Lingkungan (PL)',
-          namaUnitKerja: [
-            'Subag Adum  PL',
-            'Penyehatan Air dan Sanitasi Dasar',
-            'Penyehatan Pangan',
-            'Penyehatan Udara,Tanah dan Kawasan',
-            'Pengamanan Limbah dan Radiasi',
-            'Adaptasi Perubahan Iklim dan Kebencanaan Lingkungan',
-          ],
+          // namaUnitKerja: [
+          //   'Subag Adum  PL',
+          //   'Penyehatan Air dan Sanitasi Dasar',
+          //   'Penyehatan Pangan',
+          //   'Penyehatan Udara,Tanah dan Kawasan',
+          //   'Pengamanan Limbah dan Radiasi',
+          //   'Adaptasi Perubahan Iklim dan Kebencanaan Lingkungan',
+          // ],
         },
         {
           namaDirektorat: 'SUKARKES',
-          namaUnitKerja: [
-            'Subag Adum SUKARKES',
-            'Kekarantinaan Kesehatan',
-            'Pengelolaan Laboratorium Kesehatan Masyarakat',
-            'Pengendalian Vektor',
-            'Penyakit Infeksi Emerging',
-            'Surveilans',
-          ],
+          // namaUnitKerja: [
+          //   'Subag Adum SUKARKES',
+          //   'Kekarantinaan Kesehatan',
+          //   'Pengelolaan Laboratorium Kesehatan Masyarakat',
+          //   'Pengendalian Vektor',
+          //   'Penyakit Infeksi Emerging',
+          //   'Surveilans',
+          // ],
         },
       ],
+      namaUnitKerja: {
+        'Sekertariat P2P': [
+          'Tu. Dirjen',
+          'Tu.sesditjen',
+          'Subag Adum Sekertariat P2P',
+          'Program dan Informasi',
+          'Hukum, Organisasi dan Hubungan Masyarakat',
+          'Keuangan dan BMN',
+          'Kepegawaian dan Umum',
+          'Projek Management Office (PMO)',
+        ],
+        P2PM: [
+          'Subag Adum P2PM',
+          'Turbeckulosis dan infeksisaluran pernapasan akut (ISPA)',
+          'HIV, Penyakit Infeksi Menular Seksual (PIMS), Hepatitis dan (PISP)',
+          'Neglected Disease (Penyakit Tropis Terabaikan)',
+          'Zoonosis dan Penyakit Akibat Gigitan Hewan Berbisa dan Tanaman Beracun',
+          'Penyakit Tular Vektor',
+        ],
+        'Pengelolaan  Imunisasi': [
+          'Subag Adum Pengelolaan Imunisasi',
+          'Imunisasi Dasar dan Anak Usia di bawah dua tahun (Baduta)',
+          'Imunisasi Tambahan Dan Khusus',
+          'Imunisasi Wanita Usia Subur (WUS) dan (PD31),(KIPI)',
+          'Imunisasi Usia Sekolah dan Sumber Daya Imunisasi',
+        ],
+        P2PTM: [
+          'Subag Adum P2PTM',
+          'Gangguan Indra Dan Funsional',
+          'Diabetes Melitus dan Gangguan Metabolik',
+          'Jantung Dan Pembulu Darah',
+          'Kangker dan Kelainan Darah',
+          'Paru Kronik dan Gangguan Imunologi',
+        ],
+        'Penyehatan Lingkungan (PL)': [
+          'Subag Adum  PL',
+          'Penyehatan Air dan Sanitasi Dasar',
+          'Penyehatan Pangan',
+          'Penyehatan Udara,Tanah dan Kawasan',
+          'Pengamanan Limbah dan Radiasi',
+          'Adaptasi Perubahan Iklim dan Kebencanaan Lingkungan',
+        ],
+        SUKARKES: [
+          'Subag Adum SUKARKES',
+          'Kekarantinaan Kesehatan',
+          'Pengelolaan Laboratorium Kesehatan Masyarakat',
+          'Pengendalian Vektor',
+          'Penyakit Infeksi Emerging',
+          'Surveilans',
+        ],
+      },
       pagination: {},
       page: 1,
       limit: 4,
@@ -187,14 +243,15 @@ class Home extends Component {
     } else {
       this.pushDataa = setInterval(() => this.pushDataBasic(), 10000);
     }
-    this.timerID = setInterval(() => this.tick(), 10000);
+
+    // this.timerID = setInterval(() => this.tick(), 10000);
   }
 
-  tick() {
-    this.setState({
-      tanggal: new Date(),
-    });
-  }
+  // tick() {
+  //   this.setState({
+  //     tanggal: new Date(),
+  //   });
+  // }
   componentWillUnmount() {
     clearInterval(this.timerID);
     clearInterval(this.pushDataa);
@@ -224,12 +281,12 @@ class Home extends Component {
 
   pushData = () => {
     const arraykosong = [];
+    console.log('ini array kosong lo', this.props.bookingruangan.bismillah);
 
     Object.keys(this.props.bookingruangan.bismillah).forEach((key) => {
       const Tokenss = this.props.bookingruangan.bismillah[key];
       arraykosong.push(Tokenss);
     });
-    console.log('ini array kosong', arraykosong);
     if (arraykosong.length > 0) {
       for (let index = 0; index < arraykosong.length; index++) {
         var confdatee = new Date(
@@ -242,7 +299,6 @@ class Home extends Component {
           ) {
             this.postcoba(arraykosong[index]);
           }
-          this.postcoba(arraykosong[index]);
         }
       }
     } else {
@@ -257,6 +313,7 @@ class Home extends Component {
       const Tokenss = this.props.idUser.dataBookingById[key];
       arraykosongId.push(Tokenss);
     });
+
     if (arraykosongId.length > 0) {
       for (let index = 0; index < arraykosongId.length; index++) {
         var confdatee = new Date(
@@ -424,12 +481,31 @@ class Home extends Component {
   };
 
   handleImageTable = (moon) => {
+    console.log('handle image', moon);
     this.setState({
-      photoSuratDinas: moon.row.booking_ruangan_surat_dinas,
+      photoSuratDinas: moon,
       photoShow: true,
     });
   };
-
+  changeImage = (event) => {
+    if (event.target.files[0]) {
+      this.setState({
+        form: {
+          ...this.state.form,
+          ruangBuktiSuratDinas: URL.createObjectURL(event.target.files[0]),
+          image: event.target.files[0],
+        },
+      });
+    } else {
+      this.setState({
+        form: {
+          ...this.state.form,
+          ruangBuktiSuratDinas: null,
+          image: null,
+        },
+      });
+    }
+  };
   changeTextForm = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -514,60 +590,64 @@ class Home extends Component {
   };
 
   setUpdate = (data) => {
+    console.log('data', data);
     this.setState({
       smShow: true,
       isUpdate: true,
-      id: data.row.id,
-      dropDownVal2: data.row.booking_ruangan_unitkerja,
-      dropDownVal3: data.row.booking_ruangan_direktorat,
+      id: data.id,
+      dropDownValUnitKerja: data.booking_ruangan_unitkerja,
+      dropDownValDirektorat: data.booking_ruangan_direktorat,
       form: {
-        ruangNamaPeminjam: data.row.booking_ruangan_nama,
-        ruangNIP: data.row.booking_ruangan_nip,
-        ruangNoHP: data.row.booking_ruangan_nohp,
-        ruangEmail: data.row.booking_ruangan_email,
-        ruangSatker: data.row.booking_ruangan_unitkerja,
-        ruangDirektorat: data.row.booking_ruangan_direktorat,
-        ruangTanggalBooking: data.row.booking_ruangan_tanggal,
-        ruangKeteranganAcara:
-          data.row.booking_ruangan_keterangan_kegiatan_acara,
-        ruangPenanggungJawab: data.row.booking_ruangan_penaggung_jawab,
-        ruangYangDigunakan: data.row.booking_ruangan_ruangan,
-        idUserr: data.row.id_peminjam,
-        ruangWaktuMulai: data.row.booking_ruangan_waktu_penggunaan_awal,
-        ruangWaktuAkhir: data.row.booking_ruangan_waktu_penggunaan_akhir,
-        ruangBuktiSuratDinas: `https://devruangrapatp2p.kemkes.go.id/backend1/api/${data.row.booking_ruangan_surat_dinas}`,
+        ruangNamaPeminjam: data.booking_ruangan_nama,
+        ruangNIP: data.booking_ruangan_nip,
+        ruangNoHP: data.booking_ruangan_nohp,
+        ruangEmail: data.booking_ruangan_email,
+        ruangSatker: data.booking_ruangan_unitkerja,
+        ruangDirektorat: data.booking_ruangan_direktorat,
+        ruangTanggalBooking: new Date(
+          parseInt(data.booking_ruangan_tanggal)
+        ).toLocaleDateString('en-CA'),
+        ruangKeteranganAcara: data.booking_ruangan_keterangan_kegiatan_acara,
+        ruangPenanggungJawab: data.booking_ruangan_penaggung_jawab,
+        ruangYangDigunakan: data.booking_ruangan_ruangan,
+        idUserr: data.id_peminjam,
+        ruangRapatHadirOleh: data.booking_ruang_rapat_hadir_oleh,
+        ruangWaktuMulai: data.booking_ruangan_waktu_penggunaan_awal,
+        ruangWaktuAkhir: data.booking_ruangan_waktu_penggunaan_akhir,
+        ruangBuktiSuratDinas: `https://devruangrapatp2p.kemkes.go.id/backend1/api/${data.booking_ruangan_surat_dinas}`,
+        // ruangBuktiSuratDinas: `http://localhost:3001/backend1/api/${data.booking_ruangan_surat_dinas}`,
         image: null,
       },
     });
   };
 
   handleDibatalkan = (e) => {
+    console.log('hehe', e);
     this.setState({
       actionPilihan: 'Dibatalkan',
     });
     const laporan = {
-      laporanruangNamaPeminjam: e.row.booking_ruangan_nama,
-      laporanruangNIP: e.row.booking_ruangan_nip,
-      laporanruangNoHP: e.row.booking_ruangan_nohp,
-      laporanruangEmail: e.row.booking_ruangan_email,
-      laporanruangSatker: e.row.booking_ruangan_unitkerja,
-      laporanruangDirektorat: e.row.booking_ruangan_direktorat,
-      laporanruangTanggalBooking: e.row.booking_ruangan_tanggal,
-      laporanruangKeteranganAcara:
-        e.row.booking_ruangan_keterangan_kegiatan_acara,
-      laporanruangRapatHadirOleh: e.row.booking_ruang_rapat_hadir_oleh,
-      laporanruangPenanggungJawab: e.row.booking_ruangan_penaggung_jawab,
-      laporanruangYangDigunakan: e.row.booking_ruangan_ruangan,
-      laporanruangWaktuMulai: e.row.booking_ruangan_waktu_penggunaan_awal,
-      laporanruangWaktuAkhir: e.row.booking_ruangan_waktu_penggunaan_akhir,
-      laporanruangBuktiSuratDinas: e.row.booking_ruangan_surat_dinas,
-      idUserr: e.row.id_peminjam,
-      image: e.row.booking_ruangan_surat_dinas,
+      laporanruangNamaPeminjam: e.booking_ruangan_nama,
+      laporanruangNIP: e.booking_ruangan_nip,
+      laporanruangNoHP: e.booking_ruangan_nohp,
+      laporanruangEmail: e.booking_ruangan_email,
+      laporanruangSatker: e.booking_ruangan_unitkerja,
+      laporanruangDirektorat: e.booking_ruangan_direktorat,
+      laporanruangTanggalBooking: e.booking_ruangan_tanggal,
+      laporanruangKeteranganAcara: e.booking_ruangan_keterangan_kegiatan_acara,
+      laporanruangRapatHadirOleh: e.booking_ruang_rapat_hadir_oleh,
+      laporanruangPenanggungJawab: e.booking_ruangan_penaggung_jawab,
+      laporanruangYangDigunakan: e.booking_ruangan_ruangan,
+      laporanruangWaktuMulai: e.booking_ruangan_waktu_penggunaan_awal,
+      laporanruangWaktuAkhir: e.booking_ruangan_waktu_penggunaan_akhir,
+      laporanruangBuktiSuratDinas: e.booking_ruangan_surat_dinas,
+      idUserr: e.id_peminjam,
+      image: e.booking_ruangan_surat_dinas,
       statusBooking: 'Dibatalkan',
-      id: e.row.id,
+      id: e.id,
     };
     this.postBookingData(laporan);
-    this.deleteDataBook(e.row.id);
+    this.deleteDataBook(e.id);
   };
 
   handleSelesai = (e) => {
@@ -575,46 +655,57 @@ class Home extends Component {
       actionPilihan: 'Selesai',
     });
     const laporan = {
-      laporanruangNamaPeminjam: e.row.booking_ruangan_nama,
-      laporanruangNIP: e.row.booking_ruangan_nip,
-      laporanruangNoHP: e.row.booking_ruangan_nohp,
-      laporanruangEmail: e.row.booking_ruangan_email,
-      laporanruangSatker: e.row.booking_ruangan_unitkerja,
-      laporanruangDirektorat: e.row.booking_ruangan_direktorat,
-      laporanruangTanggalBooking: e.row.booking_ruangan_tanggal,
-      laporanruangKeteranganAcara:
-        e.row.booking_ruangan_keterangan_kegiatan_acara,
-      laporanruangRapatHadirOleh: e.row.booking_ruang_rapat_hadir_oleh,
-      laporanruangPenanggungJawab: e.row.booking_ruangan_penaggung_jawab,
-      laporanruangYangDigunakan: e.row.booking_ruangan_ruangan,
-      laporanruangWaktuMulai: e.row.booking_ruangan_waktu_penggunaan_awal,
-      laporanruangWaktuAkhir: e.row.booking_ruangan_waktu_penggunaan_akhir,
-      laporanruangBuktiSuratDinas: e.row.booking_ruangan_surat_dinas,
-      idUserr: e.row.id_peminjam,
-      image: e.row.booking_ruangan_surat_dinas,
+      laporanruangNamaPeminjam: e.booking_ruangan_nama,
+      laporanruangNIP: e.booking_ruangan_nip,
+      laporanruangNoHP: e.booking_ruangan_nohp,
+      laporanruangEmail: e.booking_ruangan_email,
+      laporanruangSatker: e.booking_ruangan_unitkerja,
+      laporanruangDirektorat: e.booking_ruangan_direktorat,
+      laporanruangTanggalBooking: e.booking_ruangan_tanggal,
+      laporanruangKeteranganAcara: e.booking_ruangan_keterangan_kegiatan_acara,
+      laporanruangRapatHadirOleh: e.booking_ruang_rapat_hadir_oleh,
+      laporanruangPenanggungJawab: e.booking_ruangan_penaggung_jawab,
+      laporanruangYangDigunakan: e.booking_ruangan_ruangan,
+      laporanruangWaktuMulai: e.booking_ruangan_waktu_penggunaan_awal,
+      laporanruangWaktuAkhir: e.booking_ruangan_waktu_penggunaan_akhir,
+      laporanruangBuktiSuratDinas: e.booking_ruangan_surat_dinas,
+      idUserr: e.id_peminjam,
+      image: e.booking_ruangan_surat_dinas,
       statusBooking: 'Selesai',
-      id: e.row.id,
+      id: e.id,
     };
     this.postBookingData(laporan);
   };
 
   changeTextFormDirektorat = (event) => {
+    console.log('event', event);
     this.setState({
+      dropDownValDirektorat: event,
       form: {
         ...this.state.form,
-        [event.target.name]: event.target.value,
-        // ruangDirektorat: event.target.value.namaDirektorat,
+        // [event.target.name]: event.target.value,
+        ruangDirektorat: event,
       },
-      foo: event.target.value.namaUnitKerja,
+      foo: this.state.namaUnitKerja[event],
     });
   };
-
+  changeTextFormUnitKerja = (event) => {
+    console.log('change text form direktorat', event);
+    this.setState({
+      dropDownValUnitKerja: event,
+      form: {
+        ...this.state.form,
+        ruangSatker: event,
+      },
+    });
+  };
   showOpenFileDlg = () => {
     inputOpenFileRef.current.click();
   };
 
   EditDataBooking = () => {
     const { form, id } = this.state;
+    console.log('form', form);
     delete form.movieImage;
     if (!form.image) {
       delete form.image;
@@ -681,7 +772,14 @@ class Home extends Component {
       ruangRapatHadirOleh,
       ruangYangDigunakan,
     } = this.state.form;
-    const { smShow, photoShow, photoSuratDinas, foo } = this.state;
+    const {
+      smShow,
+      photoShow,
+      photoSuratDinas,
+      foo,
+      dropDownValDirektorat,
+      dropDownValUnitKerja,
+    } = this.state;
     const { data } = this.props.auth;
     const { dataBookingById } = this.props.idUser;
     const { bismillah } = this.props.bookingruangan;
@@ -796,6 +894,7 @@ class Home extends Component {
                     variant='warning'
                   >
                     <EditIcon />
+                    jj
                   </Button>
                 ) : (
                   ''
@@ -854,7 +953,7 @@ class Home extends Component {
           {/* <p>{this.state.tanggal.toLocaleTimeString('en-GB')}</p> */}
 
           {/* <Button onClick={() => this.setSmShow()} className="me-2">Input Data Laporan</Button> */}
-          <div style={{ height: 640, width: '100%' }}>
+          {/* <div style={{ height: 640, width: '100%' }}>
             {data.user_role === 'admin' ? (
               <DataGrid
                 rows={bismillah}
@@ -870,6 +969,135 @@ class Home extends Component {
                 rowsPerPageOptions={[10]}
               />
             )}
+          </div> */}
+          <div className='mt-5'>
+            <Table striped bordered hover responsive>
+              <thead className='text-center'>
+                <tr className={styles.witdthKolom}>
+                  <th className={styles.witdthKolom}>No</th>
+                  <th>Nama</th>
+                  <th>NIP</th>
+                  <th>Unit Kerja</th>
+                  <th>Tanggal Mulai</th>
+                  <th className={styles.witdthKolom}>No HP</th>
+                  <th>Direktorat</th>
+                  <th>Email</th>
+                  <th>Penanggung Jawab</th>
+                  <th>Keterangan Kegiatan Acara</th>
+                  <th>Rapat yang Hadir</th>
+                  <th>Ruang Rapat</th>
+                  <th>Waktu Mulai</th>
+                  <th>Waktu Selesai</th>
+                  {data.user_role === 'admin' ? (
+                    <>
+                      <th>Surat Dinas</th>
+                      <th>Action</th>
+                    </>
+                  ) : (
+                    ''
+                  )}
+                </tr>
+              </thead>
+              {bismillah.map((item, index) => {
+                console.log('Data bismillah', bismillah);
+                return (
+                  <tbody className={styles.witdthKolom}>
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{item.booking_ruangan_nama}</td>
+                      <td>{item.booking_ruangan_nip}</td>
+                      <td>{item.booking_ruangan_unitkerja}</td>
+                      <td>
+                        {/* {item.booking_ruangan_tanggal} */}
+                        {new Date(
+                          parseInt(item.booking_ruangan_tanggal)
+                        ).toLocaleDateString('en-CA')}
+                      </td>
+                      <td>{item.booking_ruangan_nohp}</td>
+                      <td>{item.booking_ruangan_direktorat}</td>
+                      <td>{item.booking_ruangan_email}</td>
+                      <td>{item.booking_ruangan_penaggung_jawab}</td>
+                      <td>{item.booking_ruangan_keterangan_kegiatan_acara}</td>
+                      <td>{item.booking_ruang_rapat_hadir_oleh}</td>
+                      <td>{item.booking_ruangan_ruangan}</td>
+                      <td>{item.booking_ruangan_waktu_penggunaan_awal} WIB</td>
+                      <td>{item.booking_ruangan_waktu_penggunaan_akhir} WIB</td>
+                      {data.user_role === 'admin' ? (
+                        <>
+                          <td>
+                            {/* <Button
+                              onClick={() =>
+                                this.handleImageTable(
+                                  item.booking_ruangan_surat_dinas
+                                )
+                              }
+                              variant='outline-primary'
+                            >
+                              View
+                            </Button> */}
+                            <a
+                              target='_blank'
+                              href={`https://devruangrapatp2p.kemkes.go.id/backend1/api/${item.booking_ruangan_surat_dinas}`}
+                              // href={`http://localhost:3001/backend1/api/${item.booking_ruangan_surat_dinas}`}
+                            >
+                              <Button variant='outline-primary'>View</Button>
+                            </a>
+                          </td>
+                          {data.user_role === 'admin' ? (
+                            <td className={styles.kolom}>
+                              <div className={styles.kolomm}>
+                                <Button
+                                  onClick={() => this.setUpdate(item)}
+                                  variant='warning'
+                                >
+                                  <EditIcon />
+                                </Button>
+                              </div>
+                              <div className={styles.kolomm}>
+                                <Button
+                                  onClick={() => this.handleSelesai(item)}
+                                  variant='primary'
+                                >
+                                  <CheckIcon />
+                                </Button>
+                              </div>
+
+                              <Button
+                                onClick={() => this.handleDibatalkan(item)}
+                                variant='danger'
+                              >
+                                <CancelIcon />
+                              </Button>
+                            </td>
+                          ) : (
+                            <td className={styles.kolom}>
+                              <div className={styles.kolomm}>
+                                <Button
+                                  onClick={() => this.setUpdate(item)}
+                                  variant='warning'
+                                >
+                                  <EditIcon />
+                                </Button>
+                              </div>
+                              <div className={styles.kolomm}>
+                                <Button
+                                  // onClick={() => this.handleSelesai(params)}
+                                  variant='primary'
+                                >
+                                  <CheckIcon />
+                                </Button>
+                              </div>
+                            </td>
+                          )}
+                        </>
+                      ) : (
+                        ''
+                      )}
+                    </tr>
+                  </tbody>
+                );
+              })}
+            </Table>
           </div>
 
           <Modal
@@ -888,6 +1116,7 @@ class Home extends Component {
               <Image
                 className={`${styles.hero} p-4 mb-4 d-block mx-auto`}
                 src={`https://devruangrapatp2p.kemkes.go.id/backend1/api/${photoSuratDinas}`}
+                // src={`http://localhost:3001/backend1/api/${photoSuratDinas}`}
                 fluid
               />
             </Modal.Body>
@@ -910,7 +1139,7 @@ class Home extends Component {
             <Modal.Body>
               <Form>
                 <Form.Group as={Row}>
-                  <Col>
+                  {/* <Col>
                     <TextField
                       required
                       fullWidth
@@ -920,8 +1149,18 @@ class Home extends Component {
                       value={ruangNamaPeminjam}
                       onChange={(event) => this.changeTextForm(event)}
                     />
-                  </Col>
+                  </Col> */}
                   <Col>
+                    <Form.Label>Nama Peminjam</Form.Label>
+                    <Form.Control
+                      type='text'
+                      placeholder='Nama Peminjam'
+                      name='ruangNamaPeminjam'
+                      value={ruangNamaPeminjam}
+                      onChange={(event) => this.changeTextForm(event)}
+                    />
+                  </Col>
+                  {/* <Col>
                     <TextField
                       required
                       fullWidth
@@ -934,10 +1173,23 @@ class Home extends Component {
                     <Form.Control.Feedback type={NIPValid}>
                       <p className={styles.warning}>{msg}</p>
                     </Form.Control.Feedback>
+                  </Col> */}
+                  <Col>
+                    <Form.Label>NIP Peminjam</Form.Label>
+                    <Form.Control
+                      type='text'
+                      placeholder='NIP Peminjam'
+                      name='ruangNIP'
+                      value={ruangNIP}
+                      onChange={(event) => this.changeTextForm(event)}
+                    />
+                    <Form.Control.Feedback type={NIPValid}>
+                      <p className={styles.warning}>{msg}</p>
+                    </Form.Control.Feedback>
                   </Col>
                 </Form.Group>
                 <Form.Group as={Row}>
-                  <Col>
+                  {/* <Col>
                     <TextField
                       required
                       fullWidth
@@ -951,9 +1203,21 @@ class Home extends Component {
                     <Form.Control.Feedback type={phoneNumberValid}>
                       <p className={styles.warning}>{msg}</p>
                     </Form.Control.Feedback>
-                  </Col>
-
+                  </Col> */}
                   <Col>
+                    <Form.Label>No Hp</Form.Label>
+                    <Form.Control
+                      type='text'
+                      placeholder='No Hp'
+                      name='ruangNoHP'
+                      value={ruangNoHP}
+                      onChange={(event) => this.changeTextForm(event)}
+                    />
+                    <Form.Control.Feedback type={phoneNumberValid}>
+                      <p className={styles.warning}>{msg}</p>
+                    </Form.Control.Feedback>
+                  </Col>
+                  {/* <Col>
                     <TextField
                       required
                       fullWidth
@@ -966,10 +1230,23 @@ class Home extends Component {
                     <Form.Control.Feedback type={EmailValid}>
                       <p className={styles.warning}>{msg}</p>
                     </Form.Control.Feedback>
+                  </Col> */}
+                  <Col>
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                      type='text'
+                      placeholder='Email'
+                      name='ruangEmail'
+                      value={ruangEmail}
+                      onChange={(event) => this.changeTextForm(event)}
+                    />
+                    <Form.Control.Feedback type={EmailValid}>
+                      <p className={styles.warning}>{msg}</p>
+                    </Form.Control.Feedback>
                   </Col>
                 </Form.Group>
                 <Form.Group as={Row}>
-                  <Col>
+                  {/* <Col>
                     <InputLabel id='demo-simple-select-helper-label'>
                       {' '}
                       Direktorat
@@ -995,8 +1272,39 @@ class Home extends Component {
                         </p>
                       )}
                     </Select>
-                  </Col>
+                  </Col> */}
                   <Col>
+                    <Form.Label>Direktorat</Form.Label>
+                    <DropdownButton
+                      className={`${styles.dropDown} mb-2 `}
+                      variant='secondary'
+                      title={dropDownValDirektorat}
+                      id='dropdown-menu-align-right'
+                      value={ruangDirektorat}
+                      name='ruangDirektorat'
+                      onSelect={this.changeTextFormDirektorat}
+                      // onChange={(event) => this.changeTextFormDirektorat(event)}
+                    >
+                      {this.state.direktorat.length > 0 ? (
+                        this.state.direktorat.map((item, index) => {
+                          console.log('direktorat', item);
+                          return (
+                            <Dropdown.Item
+                              className={styles.semi}
+                              eventKey={item.namaDirektorat}
+                            >
+                              {item.namaDirektorat}
+                            </Dropdown.Item>
+                          );
+                        })
+                      ) : (
+                        <p className={styles.notFound}>
+                          Unit Kerja Not Found !!!
+                        </p>
+                      )}
+                    </DropdownButton>
+                  </Col>
+                  {/* <Col>
                     <TextField
                       required
                       fullWidth
@@ -1005,10 +1313,20 @@ class Home extends Component {
                       value={ruangPenanggungJawab}
                       onChange={(event) => this.changeTextForm(event)}
                     />
+                  </Col> */}
+                  <Col>
+                    <Form.Label>Penanggung Jawab</Form.Label>
+                    <Form.Control
+                      type='text'
+                      placeholder='Penanggung Jawab'
+                      name='ruangPenanggungJawab'
+                      value={ruangPenanggungJawab}
+                      onChange={(event) => this.changeTextForm(event)}
+                    />
                   </Col>
                 </Form.Group>
                 <Form.Group as={Row}>
-                  <Col xs={6}>
+                  {/* <Col xs={6}>
                     <InputLabel id='demo-simple-select-helper-label'>
                       {' '}
                       Unit Kerja
@@ -1034,10 +1352,40 @@ class Home extends Component {
                         </p>
                       )}
                     </Select>
+                  </Col> */}
+                  <Col xs={6}>
+                    <Form.Label>Unit Kerja</Form.Label>
+                    <DropdownButton
+                      className={`${styles.dropDown} mb-2 `}
+                      variant='secondary'
+                      title={dropDownValUnitKerja}
+                      id='dropdown-menu-align-right'
+                      value={ruangSatker}
+                      name='ruangSatker'
+                      // onChange={(event) => this.changeTextFormDirektorat(event)}
+                      onSelect={this.changeTextFormUnitKerja}
+                    >
+                      {foo.length > 0 ? (
+                        foo.map((item, index) => {
+                          console.log('foo', item);
+                          return (
+                            <Dropdown.Item
+                              className={styles.semi}
+                              eventKey={item}
+                            >
+                              {item}
+                            </Dropdown.Item>
+                          );
+                        })
+                      ) : (
+                        <p className={styles.notFound}>
+                          Unit Kerja Not Found !!!
+                        </p>
+                      )}
+                    </DropdownButton>
                   </Col>
-
                   <Col>
-                    <TextField
+                    {/* <TextField
                       required
                       fullWidth
                       id='outlined-password-input'
@@ -1049,6 +1397,15 @@ class Home extends Component {
                       InputProps={{
                         readOnly: true,
                       }}
+                    /> */}
+                    <Form.Label>Ruangan yang Digunakan</Form.Label>
+                    <Form.Control
+                      type='text'
+                      placeholder='Ruangan yang Digunakan'
+                      name='ruangYangDigunakan'
+                      value={ruangYangDigunakan}
+                      onChange={(event) => this.changeTextForm(event)}
+                      readOnly
                     />
                   </Col>
                 </Form.Group>
@@ -1074,7 +1431,15 @@ class Home extends Component {
                   jumlahhari === true ? ( */}
                 <Form.Group as={Row}>
                   <Col>
-                    <TextField
+                    <Form.Label>Kegiatan Acara</Form.Label>
+                    <Form.Control
+                      type='text'
+                      placeholder='Kegiatan Acara'
+                      name='ruangKeteranganAcara'
+                      value={ruangKeteranganAcara}
+                      onChange={(event) => this.changeTextForm(event)}
+                    />
+                    {/* <TextField
                       required
                       fullWidth
                       id='outlined-password-input'
@@ -1082,10 +1447,19 @@ class Home extends Component {
                       name='ruangKeteranganAcara'
                       value={ruangKeteranganAcara}
                       onChange={(event) => this.changeTextForm(event)}
-                    />
+                    /> */}
                   </Col>
                   <Col xs={6}>
-                    <TextField
+                    <Form.Label>Tanggal Booking Mulai</Form.Label>
+
+                    <Form.Control
+                      type='date'
+                      placeholder='Tanggal Booking Mulai'
+                      name='ruangTanggalBooking'
+                      value={ruangTanggalBooking}
+                      onChange={(event) => this.changeTextForm(event)}
+                    />
+                    {/* <TextField
                       InputLabelProps={{
                         shrink: true,
                       }}
@@ -1098,7 +1472,7 @@ class Home extends Component {
                       name='ruangTanggalBooking'
                       value={ruangTanggalBooking}
                       onChange={(event) => this.changeTextForm(event)}
-                    />
+                    /> */}
                   </Col>
                   {/* <Col xs={6}>
 
@@ -1141,12 +1515,21 @@ class Home extends Component {
 
                 <Form.Group as={Row}>
                   <Col>
-                    <TextField
+                    {/* <TextField
                       required
                       fullWidth
                       id='outlined-password-input'
                       label='Waktu dimulai'
                       type='time'
+                      name='ruangWaktuMulai'
+                      value={ruangWaktuMulai}
+                      onChange={(event) => this.changeTextForm(event)}
+                    /> */}
+                    <Form.Label>Waktu Dimulai</Form.Label>
+
+                    <Form.Control
+                      type='time'
+                      placeholder='Waktu Dimulai'
                       name='ruangWaktuMulai'
                       value={ruangWaktuMulai}
                       onChange={(event) => this.changeTextForm(event)}
@@ -1156,12 +1539,21 @@ class Home extends Component {
                     </Form.Control.Feedback>
                   </Col>
                   <Col>
-                    <TextField
+                    {/* <TextField
                       required
                       fullWidth
                       id='outlined-password-input'
                       label='Waktu berkahir'
                       type='time'
+                      name='ruangWaktuAkhir'
+                      value={ruangWaktuAkhir}
+                      onChange={(event) => this.changeTextForm(event)}
+                    /> */}
+                    <Form.Label>Waktu Berakhir</Form.Label>
+
+                    <Form.Control
+                      type='time'
+                      placeholder='Waktu Berakhir'
                       name='ruangWaktuAkhir'
                       value={ruangWaktuAkhir}
                       onChange={(event) => this.changeTextForm(event)}
@@ -1174,7 +1566,7 @@ class Home extends Component {
 
                 <Form.Group as={Row}>
                   <Col>
-                    <TextField
+                    {/* <TextField
                       required
                       fullWidth
                       type='text-area'
@@ -1183,6 +1575,14 @@ class Home extends Component {
                       name='ruangRapatHadirOleh'
                       value={ruangRapatHadirOleh}
                       onChange={(event) => this.changeTextForm(event)}
+                    /> */}
+                    <Form.Label>Pejabat yang Hadir</Form.Label>
+                    <Form.Control
+                      as='textarea'
+                      rows={3}
+                      onChange={(event) => this.changeTextForm(event)}
+                      name='ruangRapatHadirOleh'
+                      value={ruangRapatHadirOleh}
                     />
                   </Col>
                 </Form.Group>

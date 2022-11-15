@@ -2,8 +2,16 @@ import React, { Component } from 'react';
 // import { Link } from "react-router-dom";
 import NavBar from '../../../components/NavBar/NavBar';
 import axiosApiIntances from '../../../utils/axios';
-import { Button, Image, Container, Row, Col, Modal } from 'react-bootstrap';
-import styles from './DataFilterLaporan.module.css';
+import {
+  Button,
+  Image,
+  Container,
+  Row,
+  Col,
+  Modal,
+  Table,
+} from 'react-bootstrap';
+import styles from './DataFilterLaporanBaru.module.css';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import {
@@ -300,6 +308,7 @@ class Home extends Component {
         movieDirectedBy: data.movie_directed_by,
         movieCasts: data.movie_casts,
         movieSynopsis: data.movie_synopsis,
+        // movieImage: `http://localhost:3001/backend1/api/${data.movie_image}`,
         movieImage: `https://devruangrapatp2p.kemkes.go.id/backend1/api/${data.movie_image}`,
         image: null,
       },
@@ -606,6 +615,7 @@ class Home extends Component {
     const arrayPenyakitInfeksi = [];
     const arraySurveilans = [];
     const arrayNeglected = [];
+    console.log('arraykosong', arraykosong);
     for (let index = 0; index < arraykosong.length; index++) {
       // const element = array[index];
       if (arraykosong[index] === 'Tu. Dirjen') {
@@ -614,7 +624,7 @@ class Home extends Component {
         arrayTuSesDitJen.push(index);
       } else if (arraykosong[index] === 'Subag Adum Sekertariat P2P') {
         arraySubagAdum.push(index);
-      } else if (arraykosong[index] === 'Program dan Informa') {
+      } else if (arraykosong[index] === 'Program dan Informasi') {
         arrayProgramdanInforma.push(index);
       } else if (
         arraykosong[index] === 'Hukum, Organisasi dan Hubungan Masyarakat'
@@ -715,7 +725,6 @@ class Home extends Component {
     return (
       <>
         <NavBar isAdminPage={false} />
-
         <Container>
           <Row>
             <Col>
@@ -820,39 +829,214 @@ class Home extends Component {
               </Button>
             </Col>
           </Row>
+
+          {/* tabel sebelumnya */}
           <Box>
-            {/* sx={{ height: 900, width: '100%' }} */}
-            {dataLaporanTanggal.length > 0 && ruangDirektorat.length > 0 ? (
-              selectedFilter.length > 0 ? (
-                <DataGrid
-                  autoHeight
-                  rows={element}
-                  columns={columns}
-                  pageSize={10}
-                  rowsPerPageOptions={[10]}
-                  getRowHeight={() => 100}
-                />
-              ) : (
-                <DataGrid
-                  autoHeight
-                  rows={arraydirektorat}
-                  columns={columns}
-                  pageSize={10}
-                  rowsPerPageOptions={[10]}
-                  getRowHeight={() => 100}
-                />
-              )
-            ) : (
-              <DataGrid
-                autoHeight
-                rows={dataLaporanTanggal}
-                columns={columns}
-                pageSize={10}
-                rowsPerPageOptions={[10]}
-                getRowHeight={() => 100}
-              />
-            )}
+            <Table striped bordered hover responsive>
+              <thead className='text-center'>
+                <tr className={styles.witdthKolom}>
+                  <th className={styles.witdthKolom}>No</th>
+                  <th>Nama</th>
+                  <th>NIP</th>
+                  <th>Unit Kerja</th>
+                  <th>Tanggal Mulai</th>
+                  <th className={styles.witdthKolom}>No HP</th>
+                  <th>Direktorat</th>
+                  <th>Email</th>
+                  <th>Penanggung Jawab</th>
+                  <th>Keterangan Kegiatan Acara</th>
+                  <th>Rapat yang Hadir</th>
+                  <th>Ruang Rapat</th>
+                  <th>Waktu Mulai</th>
+                  <th>Waktu Selesai</th>
+                  <th>Surat Dinas</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+
+              {dataLaporanTanggal.length > 0 && ruangDirektorat.length > 0
+                ? selectedFilter.length > 0
+                  ? element.map((item, index) => {
+                      console.log('Data element', element);
+                      return (
+                        <tbody className={styles.witdthKolom}>
+                          <tr key={index}>
+                            <td>{index + 1}</td>
+                            <td>{item.booking_ruangan_nama}</td>
+                            <td>{item.booking_ruangan_nip}</td>
+                            <td>{item.booking_ruangan_unitkerja}</td>
+                            <td>{item.booking_ruangan_tanggal}</td>
+                            <td>{item.booking_ruangan_nohp}</td>
+                            <td>{item.booking_ruangan_direktorat}</td>
+                            <td>{item.booking_ruangan_email}</td>
+                            <td>{item.booking_ruangan_penaggung_jawab}</td>
+                            <td>
+                              {item.booking_ruangan_keterangan_kegiatan_acara}
+                            </td>
+                            <td>{item.booking_ruang_rapat_hadir_oleh}</td>
+                            <td>{item.booking_ruangan_ruangan}</td>
+                            <td>
+                              {item.booking_ruangan_waktu_penggunaan_awal} WIB
+                            </td>
+                            <td>
+                              {item.booking_ruangan_waktu_penggunaan_akhir} WIB
+                            </td>
+                            <td>
+                              <a
+                                target='_blank'
+                                href={`https://devruangrapatp2p.kemkes.go.id/backend1/api/${item.booking_ruangan_surat_dinas}`}
+                                // href={`http://localhost:3001/backend1/api/${item.booking_ruangan_surat_dinas}`}
+                              >
+                                <Button variant='outline-primary'>View</Button>
+                              </a>
+                            </td>
+                            <td>{item.status_booking_ruangan}</td>
+                          </tr>
+                        </tbody>
+                      );
+                    })
+                  : arraydirektorat.map((item, index) => {
+                      console.log('Data arraydirektorat', arraydirektorat);
+                      return (
+                        <tbody className={styles.witdthKolom}>
+                          <tr key={index}>
+                            <td>{index + 1}</td>
+                            <td>{item.booking_ruangan_nama}</td>
+                            <td>{item.booking_ruangan_nip}</td>
+                            <td>{item.booking_ruangan_unitkerja}</td>
+                            <td>{item.booking_ruangan_tanggal}</td>
+                            <td>{item.booking_ruangan_nohp}</td>
+                            <td>{item.booking_ruangan_direktorat}</td>
+                            <td>{item.booking_ruangan_email}</td>
+                            <td>{item.booking_ruangan_penaggung_jawab}</td>
+                            <td>
+                              {item.booking_ruangan_keterangan_kegiatan_acara}
+                            </td>
+                            <td>{item.booking_ruang_rapat_hadir_oleh}</td>
+                            <td>{item.booking_ruangan_ruangan}</td>
+                            <td>
+                              {item.booking_ruangan_waktu_penggunaan_awal} WIB
+                            </td>
+                            <td>
+                              {item.booking_ruangan_waktu_penggunaan_akhir} WIB
+                            </td>
+                            <td>
+                              <a
+                                target='_blank'
+                                href={`https://devruangrapatp2p.kemkes.go.id/backend1/api/${item.booking_ruangan_surat_dinas}`}
+                                // href={`http://localhost:3001/backend1/api/${item.booking_ruangan_surat_dinas}`}
+                              >
+                                <Button variant='outline-primary'>View</Button>
+                              </a>
+                            </td>
+                            <td>{item.status_booking_ruangan}</td>
+                          </tr>
+                        </tbody>
+                      );
+                    })
+                : dataLaporanTanggal.map((item, index) => {
+                    console.log('Data dataLaporanTanggal', dataLaporanTanggal);
+                    return (
+                      <tbody className={styles.witdthKolom}>
+                        <tr key={index}>
+                          <td>{index + 1}</td>
+                          <td>{item.booking_ruangan_nama}</td>
+                          <td>{item.booking_ruangan_nip}</td>
+                          <td>{item.booking_ruangan_unitkerja}</td>
+                          <td>{item.booking_ruangan_tanggal}</td>
+                          <td>{item.booking_ruangan_nohp}</td>
+                          <td>{item.booking_ruangan_direktorat}</td>
+                          <td>{item.booking_ruangan_email}</td>
+                          <td>{item.booking_ruangan_penaggung_jawab}</td>
+                          <td>
+                            {item.booking_ruangan_keterangan_kegiatan_acara}
+                          </td>
+                          <td>{item.booking_ruang_rapat_hadir_oleh}</td>
+                          <td>{item.booking_ruangan_ruangan}</td>
+                          <td>
+                            {item.booking_ruangan_waktu_penggunaan_awal} WIB
+                          </td>
+                          <td>
+                            {item.booking_ruangan_waktu_penggunaan_akhir} WIB
+                          </td>
+                          <td>
+                            <a
+                              target='_blank'
+                              href={`https://devruangrapatp2p.kemkes.go.id/backend1/api/${item.booking_ruangan_surat_dinas}`}
+                              // href={`http://localhost:3001/backend1/api/${item.booking_ruangan_surat_dinas}`}
+                            >
+                              <Button variant='outline-primary'>View</Button>
+                            </a>
+                          </td>
+                          <td>{item.status_booking_ruangan}</td>
+                        </tr>
+                      </tbody>
+                    );
+                  })}
+            </Table>
           </Box>
+
+          <div className='mt-5'>
+            {/* <Table striped bordered hover responsive>
+              <thead className='text-center'>
+                <tr className={styles.witdthKolom}>
+                  <th className={styles.witdthKolom}>No</th>
+                  <th>Nama</th>
+                  <th>NIP</th>
+                  <th>Unit Kerja</th>
+                  <th>Tanggal Mulai</th>
+                  <th className={styles.witdthKolom}>No HP</th>
+                  <th>Direktorat</th>
+                  <th>Email</th>
+                  <th>Penanggung Jawab</th>
+                  <th>Keterangan Kegiatan Acara</th>
+                  <th>Rapat yang Hadir</th>
+                  <th>Ruang Rapat</th>
+                  <th>Waktu Mulai</th>
+                  <th>Waktu Selesai</th>
+                  <th>Surat Dinas</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+
+              {element.map((item, index) => {
+                console.log('Data element', element);
+                return (
+                  <tbody className={styles.witdthKolom}>
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{item.booking_ruangan_nama}</td>
+                      <td>{item.booking_ruangan_nip}</td>
+                      <td>{item.booking_ruangan_unitkerja}</td>
+                      <td>{item.booking_ruangan_tanggal}</td>
+                      <td>{item.booking_ruangan_nohp}</td>
+                      <td>{item.booking_ruangan_direktorat}</td>
+                      <td>{item.booking_ruangan_email}</td>
+                      <td>{item.booking_ruangan_penaggung_jawab}</td>
+                      <td>{item.booking_ruangan_keterangan_kegiatan_acara}</td>
+                      <td>{item.booking_ruang_rapat_hadir_oleh}</td>
+                      <td>{item.booking_ruangan_ruangan}</td>
+                      <td>{item.booking_ruangan_waktu_penggunaan_awal} WIB</td>
+                      <td>{item.booking_ruangan_waktu_penggunaan_akhir} WIB</td>
+                      <td>
+                        <Button
+                          onClick={() =>
+                            this.handleImageTable(
+                              item.booking_ruangan_surat_dinas
+                            )
+                          }
+                          variant='outline-primary'
+                        >
+                          View
+                        </Button>
+                      </td>
+                      <td>{item.status_booking_ruangan}</td>
+                    </tr>
+                  </tbody>
+                );
+              })}
+            </Table> */}
+          </div>
 
           <div className='mt-5 mb-5'>
             {ruangDirektorat === 'Sekertariat P2P' ? (
@@ -1154,6 +1338,7 @@ class Home extends Component {
               <Image
                 className={`${styles.hero} p-4 mb-4 d-block mx-auto`}
                 src={`https://devruangrapatp2p.kemkes.go.id/backend1/api/${photoSuratDinas}`}
+                // src={`http://localhost:3001/backend1/api/${photoSuratDinas}`}
                 fluid
               />
             </Modal.Body>

@@ -1,117 +1,137 @@
 const initialState = {
   isLoading: false,
   isError: false,
-  msg: "",
+  msg: '',
   laporanruangann: [],
   laporantanggal: [],
-  pag: []
+  pag: [],
 };
 
 const laporanruangan = (state = initialState, action) => {
   switch (action.type) {
-    case "GET_LAPORANRUANGAN_ALL_PENDING":
+    case 'GET_LAPORANRUANGAN_ALL_PENDING':
       return {
         ...state,
         isLoading: true,
         isError: false,
       };
-    case "GET_LAPORANRUANGAN_ALL_FULFILLED":
+    case 'GET_LAPORANRUANGAN_ALL_FULFILLED':
       return {
         ...state,
         isLoading: false,
         isError: false,
         msg: action.payload.data.msg,
         laporann: action.payload.data.data,
-        pag: action.payload.data.pagination
+        pag: action.payload.data.pagination,
       };
-    case "GET_LAPORANRUANGAN_ALL_REJECTED":
+    case 'GET_LAPORANRUANGAN_ALL_REJECTED':
       return {
         ...state,
         isLoading: false,
         isError: true,
         msg: action.payload.message,
-        laporann: []
+        laporann: [],
       };
-    case "GET_ALL_TANPAFILL_PENDING":
+    case 'GET_ALL_TANPAFILL_PENDING':
       return {
         ...state,
         isLoading: true,
         isError: false,
       };
-    case "GET_ALL_TANPAFILL_FULFILLED":
+    case 'GET_ALL_TANPAFILL_FULFILLED':
       return {
         ...state,
         isLoading: false,
         isError: false,
         msg: action.payload.data.msg,
         laporanruangann: action.payload.data.data,
-        pag: action.payload.data.pagination
+        pag: action.payload.data.pagination,
       };
-    case "GET_ALL_TANPAFILL_REJECTED":
+    case 'GET_ALL_TANPAFILL_REJECTED':
       return {
         ...state,
         isLoading: false,
         isError: true,
         msg: action.payload.message,
-        laporanruangann: []
+        laporanruangann: [],
       };
-    case "GET_ALL_TANGAL_PENDING":
+    case 'GET_ALL_TANGAL_PENDING':
       return {
         ...state,
         isLoading: true,
         isError: false,
       };
-    case "GET_ALL_TANGAL_FULFILLED":
+    case 'GET_ALL_TANGAL_FULFILLED':
       return {
         ...state,
         isLoading: false,
         isError: false,
         msg: action.payload.data.msg,
         laporantanggal: action.payload.data.data,
-        pag: action.payload.data.pagination
+        pag: action.payload.data.pagination,
       };
-    case "GET_ALL_TANGAL_REJECTED":
+    case 'GET_ALL_TANGAL_REJECTED':
       return {
         ...state,
         isLoading: false,
         isError: true,
         msg: action.payload.message,
-        laporantanggal: []
+        laporantanggal: [],
       };
-    case "POST_LAPORANRUANGAN_PENDING":
+    case 'POST_LAPORANRUANGAN_PENDING':
       return {
         ...state,
         isLoading: true,
         isError: false,
       };
-    case "POST_LAPORANRUANGAN_FULFILLED":
+    case 'POST_LAPORANRUANGAN_FULFILLED':
       return {
         ...state,
         isLoading: false,
         isError: false,
         msg: action.payload.data.msg,
       };
-    case "POST_LAPORANRUANGAN_REJECTED":
+    case 'POST_LAPORANRUANGAN_REJECTED':
       return {
         ...state,
         isLoading: false,
         isError: true,
         msg: action.payload.message,
       };
-    case "DELETE_LAPORANRUANGAN_ALL_PENDING":
+    case 'DELETE_LAPORANRUANGAN_ALL_PENDING':
       return {
         ...state,
         isLoading: true,
         isError: false,
       };
-    case "DELETE_LAPORANRUANGAN_ALL_FULFILLED":
+    case 'DELETE_LAPORANRUANGAN_ALL_FULFILLED':
       return {
         ...state,
         isLoading: false,
         isError: false,
         msg: action.payload.data.msg,
       };
-    case "DELETE_LAPORANRUANGAN_ALL_REJECTED":
+    case 'DELETE_LAPORANRUANGAN_ALL_REJECTED':
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        msg: action.payload.message,
+      };
+    case 'DELETE_LAPORANRUANGAN_BY_ID_PENDING':
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    case 'DELETE_LAPORANRUANGAN_BY_ID_FULFILLED':
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        msg: action.payload.data.msg,
+      };
+    case 'DELETE_LAPORANRUANGAN_BY_ID_REJECTED':
       return {
         ...state,
         isLoading: false,

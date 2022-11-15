@@ -1,119 +1,119 @@
 const initialState = {
   isLoading: false,
   isError: false,
-  msg: "",
+  msg: '',
   bismillah: [],
   til: [],
-  paginationn: []
+  paginationn: [],
 };
 
 const bookruangan = (state = initialState, action) => {
   switch (action.type) {
-    case "GET_BOOKINGRUANGAN_ALL_PENDING":
+    case 'GET_BOOKINGRUANGAN_ALL_PENDING':
       return {
         ...state,
         isLoading: true,
         isError: false,
       };
-    case "GET_BOOKINGRUANGAN_ALL_FULFILLED":
+    case 'GET_BOOKINGRUANGAN_ALL_FULFILLED':
       return {
         ...state,
         isLoading: false,
         isError: false,
         msg: action.payload.data.msg,
         til: action.payload.data.data,
-        paginationn: action.payload.data.pagination
+        paginationn: action.payload.data.pagination,
       };
-    case "GET_BOOKINGRUANGAN_ALL_REJECTED":
+    case 'GET_BOOKINGRUANGAN_ALL_REJECTED':
       return {
         ...state,
         isLoading: false,
         isError: true,
         msg: action.payload.message,
-        til: []
+        til: [],
       };
-    case "GET_ALL_TANPAFILL_PENDING":
+    case 'GET_ALL_TANPAFILL_PENDING':
       return {
         ...state,
         isLoading: true,
         isError: false,
       };
-    case "GET_ALL_TANPAFILL_FULFILLED":
+    case 'GET_ALL_TANPAFILL_FULFILLED':
       return {
         ...state,
         isLoading: false,
         isError: false,
         msg: action.payload.data.msg,
         bismillah: action.payload.data.data,
-        paginationnn: action.payload.data.pagination
+        paginationnn: action.payload.data.pagination,
       };
-    case "GET_ALL_TANPAFILL_REJECTED":
+    case 'GET_ALL_TANPAFILL_REJECTED':
       return {
         ...state,
         isLoading: false,
         isError: true,
         msg: action.payload.message,
-        bismillah: []
+        bismillah: [],
       };
-    case "POST_BOOKINGRUANGAN_PENDING":
+    case 'POST_BOOKINGRUANGAN_PENDING':
       return {
         ...state,
         isLoading: true,
         isError: false,
       };
-    case "POST_BOOKINGRUANGAN_FULFILLED":
+    case 'POST_BOOKINGRUANGAN_FULFILLED':
       return {
         ...state,
         isLoading: false,
         isError: false,
         msg: action.payload.data.msg,
       };
-    case "POST_BOOKINGRUANGAN_REJECTED":
-      return {
-        ...state,
-        isLoading: false,
-        isError: true,
-        msg: action.payload.message,
-      };
-    case "DELETE_BOOKING_RUANGAN_PENDING":
-      return {
-        ...state,
-        isLoading: true,
-        isError: false,
-      };
-    case "DELETE_BOOKING_RUANGAN_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        isError: false,
-        msg: action.payload.data.msg,
-      };
-    case "DELETE_BOOKING_RUANGAN_REJECTED":
+    case 'POST_BOOKINGRUANGAN_REJECTED':
       return {
         ...state,
         isLoading: false,
         isError: true,
         msg: action.payload.message,
       };
-    case "UPDATE_BOOKING_RUANGAN_PENDING":
+    case 'DELETE_BOOKING_RUANGAN_PENDING':
       return {
         ...state,
         isLoading: true,
         isError: false,
       };
-    case "UPDATE_BOOKING_RUANGAN_FULFILLED":
+    case 'DELETE_BOOKING_RUANGAN_FULFILLED':
       return {
         ...state,
         isLoading: false,
         isError: false,
         msg: action.payload.data.msg,
       };
-    case "UPDATE_BOOKING_RUANGAN_REJECTED":
+    case 'DELETE_BOOKING_RUANGAN_REJECTED':
       return {
         ...state,
         isLoading: false,
         isError: true,
+        msg: action.payload.message,
+      };
+    case 'UPDATE_BOOKING_RUANGAN_PENDING':
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    case 'UPDATE_BOOKING_RUANGAN_FULFILLED':
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
         msg: action.payload.data.msg,
+      };
+    case 'UPDATE_BOOKING_RUANGAN_REJECTED':
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        msg: action.payload.response.data.msg,
       };
     default:
       return state;
