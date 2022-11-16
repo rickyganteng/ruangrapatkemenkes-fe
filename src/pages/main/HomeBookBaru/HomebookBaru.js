@@ -1750,7 +1750,8 @@ class Home extends Component {
                 </tr>
               </thead>
               {waitingtanpafill.map((item, index) => {
-                console.log('waiting tanpa fill', waitingtanpafill);
+                console.log('waiting tanpa fill', item);
+                console.log('waiting tanpa ', data);
                 return (
                   <tbody className={styles.witdthKolom}>
                     <tr key={index}>
@@ -1782,15 +1783,15 @@ class Home extends Component {
                       </td>
                       {data.user_role === 'admin' ? (
                         ''
+                      ) : data.id == item.id_peminjam ? (
+                        <Button
+                          onClick={() => this.setUpdate(item)}
+                          variant='warning'
+                        >
+                          <EditIcon />
+                        </Button>
                       ) : (
-                        <td>
-                          <Button
-                            onClick={() => this.setUpdate(item)}
-                            variant='warning'
-                          >
-                            <EditIcon />
-                          </Button>
-                        </td>
+                        '-'
                       )}
                       <td>
                         {data.user_role === 'admin' ? (
