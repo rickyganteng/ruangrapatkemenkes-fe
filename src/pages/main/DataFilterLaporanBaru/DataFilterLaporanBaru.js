@@ -865,7 +865,11 @@ class Home extends Component {
                             <td>{item.booking_ruangan_nama}</td>
                             <td>{item.booking_ruangan_nip}</td>
                             <td>{item.booking_ruangan_unitkerja}</td>
-                            <td>{item.booking_ruangan_tanggal}</td>
+                            <td>
+                              {new Date(
+                                parseInt(item.booking_ruangan_tanggal)
+                              ).toLocaleDateString('en-CA')}
+                            </td>
                             <td>{item.booking_ruangan_nohp}</td>
                             <td>{item.booking_ruangan_direktorat}</td>
                             <td>{item.booking_ruangan_email}</td>
@@ -904,7 +908,11 @@ class Home extends Component {
                             <td>{item.booking_ruangan_nama}</td>
                             <td>{item.booking_ruangan_nip}</td>
                             <td>{item.booking_ruangan_unitkerja}</td>
-                            <td>{item.booking_ruangan_tanggal}</td>
+                            <td>
+                              {new Date(
+                                parseInt(item.booking_ruangan_tanggal)
+                              ).toLocaleDateString('en-CA')}
+                            </td>
                             <td>{item.booking_ruangan_nohp}</td>
                             <td>{item.booking_ruangan_direktorat}</td>
                             <td>{item.booking_ruangan_email}</td>
@@ -943,7 +951,11 @@ class Home extends Component {
                           <td>{item.booking_ruangan_nama}</td>
                           <td>{item.booking_ruangan_nip}</td>
                           <td>{item.booking_ruangan_unitkerja}</td>
-                          <td>{item.booking_ruangan_tanggal}</td>
+                          <td>
+                            {new Date(
+                              parseInt(item.booking_ruangan_tanggal)
+                            ).toLocaleDateString('en-CA')}
+                          </td>
                           <td>{item.booking_ruangan_nohp}</td>
                           <td>{item.booking_ruangan_direktorat}</td>
                           <td>{item.booking_ruangan_email}</td>
