@@ -45,10 +45,14 @@ class InvoiceModal extends React.Component {
         <Modal size='xl' show={this.props.show} onHide={this.props.closeModal}>
           <div id='invoiceCapture'>
             <h2 className={`${styles.centertext} mt-5`}>
-              LAPORAN PEMINJAMAN RUANG RAPAT DITJEN P2P ko
+              LAPORAN PEMINJAMAN RUANG RAPAT
             </h2>
+            {/* <h2 className={`${styles.centertext} mt-5`}> */}
+            <h2 className={`${styles.centertext} mt-5`}>DITJEN P2P PERIODE </h2>
             <h2 className={`${styles.centertext} mt-5`}>
-              PERIODE {timeFromDate} - {timeToDate}
+              {/* </h2>
+            <h2 className={`${styles.centertext} mt-5`}> */}
+              {timeFromDate} - {timeToDate}
             </h2>
             <div className='p-4'>
               {this.props.ruangDirektorat === 'Sekertariat P2P' ? (
